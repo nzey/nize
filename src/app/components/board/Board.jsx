@@ -12,7 +12,7 @@ function Board(
   const decoy = [
     ['x', null, 'o'],
     ['x', null, 'o'],
-    [null, 'o', 'x'],
+    [null, null, 'x'],
   ];
 
   return (
@@ -21,7 +21,10 @@ function Board(
       <div className="board">
       {decoy.map((row, rowId) =>
         <div className="row" key={rowId}>
-          {row.map((val, colId) => <Tile coord={[rowId, colId]} />)}
+          {row.map((val, colId) => {
+            const coordinate = [rowId, colId];
+            return <Tile coord={coordinate} owner={val} onTileClick={() => console.log(coordinate)} />;
+          })}
         </div>
       )}
       </div>
