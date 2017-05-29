@@ -6,7 +6,10 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
 import App from './components/App';
 import Home from './components/home/Home';
-import Board from './components/board/Board';
+import Plan from './components/plan/Plan';
+import Today from './components/today/Today';
+import Now from './components/now/Now';
+import Review from './components/review/Review';
 
 import reducers from './reducers';
 
@@ -20,7 +23,10 @@ ReactDOM.render(
     <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
       <Route path="/" component={App}>
         <IndexRoute component={Home} />;
-        <Route path="/play" component={Board} />
+        <Route path="/plan" component={Plan} />
+        <Route path="/today" component={Today} />
+        <Route path="/now" component={Now} />
+        <Route path="/review" component={Review} />
       </Route>
     </Router>
   </Provider>

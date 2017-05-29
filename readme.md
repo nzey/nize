@@ -1,28 +1,24 @@
 # Simple Tic-Tac-Toe
 
 ## Summary
-Simple app to practice using the below linked react-redux seed project.
-
-## Tech Stack
-
+Application to both organize and complete tasks in a format designed to encourage single-tasking.
 
 ### Seed Project Directory
 
 https://github.com/DimitriMikadze/express-react-redux-starter
-
 
 ## Getting Started
 
 Clone Repo
 
 ````
-git clone 
+git clone https://github.com/nzey/nize
 ````
 
 npm install dependencies
 
 ````
-cd react_redux_ttt
+cd nize
 
 npm install
 ````
@@ -49,7 +45,7 @@ npm run test:watch
 
 ### Linting
 
-For linting i'm using Eslint with Airbnb Eslint configuration
+Eslint with Airbnb Eslint configuration
 
 ````
 npm run lint

@@ -2,6 +2,6 @@
 /.idea
 /dist
 /devnotes
-.DS_Store
+**.DS_Store**
 bundle.js
 npm-debug.log

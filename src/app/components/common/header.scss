@@ -5,13 +5,23 @@ header {
   margin-bottom: 40px;
 
   nav {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    div {
+      display: flex;
+      margin-right: 35%;
+      padding-left: 2%;
+    }
 
     ul {
-      text-align: center;
+      display: flex;
+      justify-content: center;
+      list-style-type: none;
 
       li {
-        display: inline;
-        margin-right: 60px;
+        padding: 2px 5px 2px 5px;
 
         a {
           color: #333;
@@ -26,3 +36,8 @@ header {
     }
   }
 }
+
+// #home-button {
+//   display: flex;
+//   align-self: flex-start;
+// }

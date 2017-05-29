@@ -1,7 +1,7 @@
 {
   "name": "ttt",
   "version": "1.0.0",
-  "description": "Simple app to practice using the below linked react-redux seed project.",
+  "description": "Single-tasking organization application",
   "scripts": {
     "dev": "webpack-dev-server --watch --colors",
     "build": "rimraf dist && NODE_ENV=production webpack --colors",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/nzey/react_redux_ttt"
+    "url": "https://github.com/nzey/nize"
   },
   "author": "Lindsay Anchors",
   "license": "",

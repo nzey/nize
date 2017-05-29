@@ -5,12 +5,21 @@ function Header() {
   return (
     <header>
       <nav>
+        <div id="home-button">
+          <Link to="/">Home</Link>
+        </div>
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/plan">Plan</Link>
           </li>
           <li>
-            <Link to="/play">Play</Link>
+            <Link to="/today">Today</Link>
+          </li>
+          <li>
+            <Link to="/now">Now</Link>
+          </li>
+          <li>
+            <Link to="/review">Review</Link>
           </li>
         </ul>
       </nav>
