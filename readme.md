@@ -1,4 +1,4 @@
-# Simple Tic-Tac-Toe
+# Nize
 
 ## Summary
 Application to both organize and complete tasks in a format designed to encourage single-tasking.
