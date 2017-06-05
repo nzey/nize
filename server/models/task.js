@@ -1,30 +1,46 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var Task = sequelize.define('Task', {
-    title: DataTypes.STRING,
-    description: DataTypes.STRING,
-    type: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: Type,
-        key: 'id',
-      }
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
     },
+    description: DataTypes.STRING,
     notes: DataTypes.STRING,
-    estimatedTime: DataTypes.FLOAT, // hours, could be fraction of hour of multiple hours
-    estimateConfidence: DataTypes.INTEGER, // 30 means 30%, etc.
+    estimatedTime: { // hours, could be fraction of hour of multiple hours
+      type: ç.FLOAT,
+      allowNull: false,
+    },
+    estimateConfidence: {
+      type:  // 30 means 30%, etc..INTEGER, // 30 means 30%, etc.
+      allowNull: false,
+    },
     actualTime: DataTypes.FLOAT,
     dateStarted: DataTypes.DATE,
     dateCompleted: DataTypes.DATE,
     deadline: DataTypes.DATE,
-    specificTimeTask: DataTypes.DATE, // if a task must be done at a specific time/date
+    specificTime: DataTypes.DATE, // if a task must be done at a specific time/date
     recurrence: DataTypes.STRING, // '#/[min, hr, wk, month, m, m-t, m-t-w, etc]'
   }, {
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
-      }
-    }
+        Task.belongsTo(models.Type, {
+          foreignKey: 'typeId',
+        });
+        Task.belongsTo(models.Resource, {
+          foreignKey: 'resourceId',
+        });
+        Task.hasMany(models.Dependency, {
+          foreignKey: 'taskId',
+          as: 'dependencies',
+        });
+        Task.hasMany(models.UserTask, {
+          foreignKey: 'taskId',
+          as: 'usertasks',
+        });
+      },
+    },
   });
   return Task;
 };
