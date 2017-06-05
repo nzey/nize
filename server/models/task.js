@@ -9,11 +9,11 @@ module.exports = function(sequelize, DataTypes) {
     description: DataTypes.STRING,
     notes: DataTypes.STRING,
     estimatedTime: { // hours, could be fraction of hour of multiple hours
-      type: ç.FLOAT,
+      type: DataTypes.FLOAT,
       allowNull: false,
     },
     estimateConfidence: {
-      type:  // 30 means 30%, etc..INTEGER, // 30 means 30%, etc.
+      type: DataTypes.INTEGER, // 30 means 30%, etc..INTEGER, // 30 means 30%, etc.
       allowNull: false,
     },
     actualTime: DataTypes.FLOAT,
