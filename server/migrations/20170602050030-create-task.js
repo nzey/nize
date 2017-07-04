@@ -31,7 +31,7 @@ module.exports = {
       },
       notes: Sequelize.STRING,
       estimatedTime: {
-        type: Sequelize.FLOAT,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       estimateConfidence: {

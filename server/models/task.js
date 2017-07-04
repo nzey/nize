@@ -7,8 +7,8 @@ module.exports = function(sequelize, DataTypes) {
     },
     description: DataTypes.STRING,
     notes: DataTypes.STRING,
-    estimatedTime: { // hours, could be fraction of hour of multiple hours
-      type: DataTypes.FLOAT,
+    estimatedTime: { // 00:15, 1:30, etc
+      type: DataTypes.STRING,
       allowNull: false,
     },
     estimateConfidence: {
