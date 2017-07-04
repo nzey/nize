@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser')
 const path = require('path');
 const cors = require('cors');
 const db = require('./models/index.js');
@@ -10,9 +11,11 @@ app.use(cors())
 app.use(express.static('./'));
 app.use(express.static('dist'));
 
-app.get('/api/tasks', handlers.taskHandler);
+const jsonParser = bodyParser.json();
+// const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
-console.log('pathname: ', path.join(__dirname, '../dist/index.html'));
+app.get('/api/tasks', handlers.taskHandler);
+app.post('/api/tasks', jsonParser, handlers.taskHandler);
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/index.html'));
