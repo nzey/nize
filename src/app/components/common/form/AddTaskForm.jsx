@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Button, Dropdown, Form } from 'semantic-ui-react';
-import timeOptions from './timeOptions';
-// import axios from 'axios';
+import axios from 'axios';
+import { timeOptions, confidenceOptions } from './options';
+import LoadTasksAction from '../../../actions/LoadTasksAction';
 
 class AddTaskForm extends Component {
   constructor(props) {
@@ -9,7 +12,8 @@ class AddTaskForm extends Component {
     this.state = {
       title: '',
       description: '',
-      time: '',
+      estimatedTime: '',
+      estimateConfidence: null,
     };
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,11 +27,15 @@ class AddTaskForm extends Component {
   }
 
   handleSubmit(e) {
-    console.log('title: ', this.state.title);
-    console.log('descritpion: ', this.state.description);
-    console.log('time: ', this.state.time);
-    // axios post task
-    // trigger new get request
+    axios({
+      method: 'POST',
+      url: 'http://localhost:5000/api/tasks',
+      data: this.state,
+    }).then(() => {
+      return axios.get('http://localhost:5000/api/tasks');
+    }).then(tasks => {
+      this.props.LoadTasksAction(tasks);
+    });
     this.props.closeModal();
   }
 
@@ -47,7 +55,10 @@ class AddTaskForm extends Component {
           <input name='description' placeholder='your description here' value={this.state.description} onChange={this.handleInput} />
         </Form.Field>
         <Form.Field>
-          <Dropdown name='time' placeholder='Time Estimate' onChange={this.handleInput} fluid search selection options={timeOptions} />
+          <Dropdown name='estimatedTime' placeholder='Time Estimate' onChange={this.handleInput} fluid search selection options={timeOptions} />
+        </Form.Field>
+        <Form.Field>
+          <Dropdown name='estimateConfidence' placeholder='% confidence' onChange={this.handleInput} fluid search selection options={confidenceOptions} />
         </Form.Field>
         <Button type='submit'>Add</Button>
         <Button type='submit'>Cancel</Button>
@@ -56,4 +67,18 @@ class AddTaskForm extends Component {
   };
 }
 
-export default AddTaskForm;
+
+function mapStateToProps(state) {
+  return {};
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    LoadTasksAction,
+  }, dispatch);
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AddTaskForm);
