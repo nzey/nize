@@ -14,6 +14,7 @@ module.exports = {
         unique: true,
       },
       description: Sequelize.STRING,
+      position: Sequelize.STRING, // e.g. "[0, 0]" or "[50, 100]"
       typeId: {
         type: Sequelize.INTEGER,
         references: {
