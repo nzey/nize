@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Task from '../common/task/Task.jsx';
+// import Card from '../common/card/Card.jsx';
 
 function Review() {
   return (
@@ -8,7 +8,6 @@ function Review() {
       <div className="completed-list">
       List of completed tasks with links to see the work done on those tasks (e.g. notes, code, sent-email)
       </div>
-      <Task />
     </div>
   );
 }

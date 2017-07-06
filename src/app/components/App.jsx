@@ -2,7 +2,8 @@ import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import axios from 'axios';
-
+import HTML5Backend from 'react-dnd-html5-backend';
+import { DragDropContext } from 'react-dnd';
 import Header from './common/Header';
 import LoadTasksAction from '../actions/LoadTasksAction';
 
@@ -36,7 +37,7 @@ function mapDispatchToProps(dispatch) {
   }, dispatch);
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default DragDropContext(HTML5Backend)(connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(App));
