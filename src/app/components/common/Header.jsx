@@ -6,20 +6,20 @@ function Header() {
     <header>
       <nav>
         <div id="home-button">
-          <Link to="/">Home</Link>
+          <Link to="/" activeStyle={{ color: '#4183c4' }}>Home</Link>
         </div>
         <ul>
           <li>
-            <Link to="/plan">Plan</Link>
+            <Link to="/plan" activeStyle={{ color: '#4183c4' }}>Plan</Link>
           </li>
           <li>
-            <Link to="/today">Today</Link>
+            <Link to="/today" activeStyle={{ color: '#4183c4' }}>Today</Link>
           </li>
           <li>
-            <Link to="/now">Now</Link>
+            <Link to="/now" activeStyle={{ color: '#4183c4' }}>Now</Link>
           </li>
           <li>
-            <Link to="/review">Review</Link>
+            <Link to="/review" activeStyle={{ color: '#4183c4' }}>Review</Link>
           </li>
         </ul>
       </nav>
