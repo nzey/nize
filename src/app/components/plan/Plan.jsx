@@ -3,16 +3,25 @@ import { connect } from 'react-redux';
 import { Button } from 'semantic-ui-react';
 import Card from '../common/card/Card.jsx';
 import Modal from '../common/modal/Modal.jsx';
+import EditableGroup from '../editableGroup/EditableGroup.jsx';
 
 class Plan extends Component {
   constructor(props) {
     super(props);
-    this.state = { modalIsOpen: false };
+    this.state = { 
+      modalIsOpen: false,
+      buildingGroup: false,
+    };
     this.toggleModal = this.toggleModal.bind(this);
+    this.toggleBuildingGroup = this.toggleBuildingGroup.bind(this);
   }
 
   toggleModal() {
     this.setState({ modalIsOpen: !this.state.modalIsOpen });
+  }
+
+  toggleBuildingGroup() {
+    this.setState({ buildingGroup: !this.state.buildingGroup });
   }
 
   render() {
@@ -20,7 +29,9 @@ class Plan extends Component {
       <div className="container plan">
         <Button onClick={this.toggleModal}>Add Task</Button>
         <Modal type="addTask" isOpen={this.state.modalIsOpen} closeModal={this.toggleModal} />
-        <div className="taskgrid">
+        <Button onClick={this.toggleBuildingGroup}>Add Group</Button>
+        <div className="cardContainer">
+          {this.state.buildingGroup ? <EditableGroup /> : null}
           {this.props.allTasks.data.map(task => <Card key={task.id} task={task} />)}
         </div>
       </div>
