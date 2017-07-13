@@ -1,6 +1,11 @@
 .card {
-    margin: 2px;
-    width: 10%;
-    background-color: darkblue;
-    color: whitesmoke;
+    overflow: scroll;
+    margin: 5px;
+    font-size: small;
+    border: 2px solid #a58fa8;
+    height: 50px;
+    width: 150px;
+    padding: 10px;
+    background-color: #f8e568;
+    color: #584a5a;
 }

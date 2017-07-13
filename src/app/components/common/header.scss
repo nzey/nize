@@ -3,6 +3,8 @@ header {
   padding: 0;
   border-bottom: 1px solid $light-gray;
   margin-bottom: 10px;
+  background-color: $coal;
+
 
   nav {
     display: flex;
@@ -11,7 +13,7 @@ header {
 
     div {
       display: flex;
-      margin-right: 35%;
+      margin-right: 36%;
       padding-left: 2%;
     }
 
@@ -24,11 +26,11 @@ header {
         padding: 2px 5px 2px 5px;
 
         a {
-          color: #333;
+          color: $light-purple;
           text-decoration: none;
 
           &:hover {
-            color: $light-blue;
+            color: $mellow-yellow;
             text-decoration: underline;
           }
         }
@@ -36,8 +38,3 @@ header {
     }
   }
 }
-
-// #home-button {
-//   display: flex;
-//   align-self: flex-start;
-// }
