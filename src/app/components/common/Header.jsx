@@ -5,9 +5,6 @@ function Header() {
   return (
     <header>
       <nav>
-        <div id="home-button">
-          <Link to="/"></Link>
-        </div>
         <ul>
           <li>
             <Link to="/plan" activeStyle={{ color: '#faed97' }}>Plan</Link>

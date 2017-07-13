@@ -1,25 +1,18 @@
 header {
   width: 100%;
   padding: 0;
-  border-bottom: 1px solid $light-gray;
+  border-bottom: 1px solid $light-purple;
   margin-bottom: 10px;
   background-color: $coal;
 
-
   nav {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
-
-    div {
-      display: flex;
-      margin-right: 36%;
-      padding-left: 2%;
-    }
 
     ul {
       display: flex;
-      justify-content: center;
+      padding-left: 0px;
       list-style-type: none;
 
       li {
