@@ -4,14 +4,13 @@
 Application to both organize and complete tasks in a format designed to encourage single-tasking.
 
 ### Wireframes
-
-https://app.moqups.com/nzey/e0lj15dk7s/view/page/ac5446025?ui=0
+[https://app.moqups.com/nzey/e0lj15dk7s...](https://app.moqups.com/nzey/e0lj15dk7s/view/page/ac5446025)
 
 ### Seed Project Directory
 
-https://github.com/DimitriMikadze/express-react-redux-starter
+[express-react-redux-starter](https://github.com/DimitriMikadze/express-react-redux-starter)
 
-## Getting Started
+## Run Locally
 
 Clone Repo
 
