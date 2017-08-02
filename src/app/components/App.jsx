@@ -11,6 +11,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     axios.get('http://localhost:5000/api/tasks').then(tasks => {
+      console.log('tasks when loaded, passed to ACTION: ', tasks)
       this.props.LoadTasksAction(tasks);
     });
   }

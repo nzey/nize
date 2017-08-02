@@ -7,6 +7,12 @@ import Types from '../../../constants';
  * Specifies the drag source contract.
  * Only `beginDrag` function is required.
  */
+const CardActions = {
+  moveCardToList: (itemId, dropResultListId) => {
+    console.log('moveCarToList params: ', itemId, ' and ', dropResultListId);
+  },
+};
+
 const cardSource = {
   beginDrag(props) {
     // Return the data describing the dragged item
@@ -16,13 +22,16 @@ const cardSource = {
 
   endDrag(props, monitor, component) {
     if (!monitor.didDrop()) {
+      console.log("Can't place there")
       return;
     }
 
     // When dropped on a compatible target, do something
     const item = monitor.getItem();
     const dropResult = monitor.getDropResult();
-    CardActions.moveCardToList(item.id, dropResult.listId);
+    console.log('endDrag, monitor: ', monitor)
+    console.log('endDrag, component: ', component)
+    CardActions.moveCardToList(item, dropResult);
   }
 };
 
