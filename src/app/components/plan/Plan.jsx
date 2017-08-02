@@ -27,7 +27,8 @@ class Plan extends Component {
   }
 
   render() {
-    const { connectDropTarget } = this.props;
+    const { connectDropTarget, allTasks } = this.props;
+
     return connectDropTarget(
       <div className="container plan">
         <Button onClick={this.toggleModal}>Add Task</Button>
@@ -35,14 +36,14 @@ class Plan extends Component {
         <Button onClick={this.toggleBuildingGroup}>Add Group</Button>
         <div className="cardContainer">
           {this.state.buildingGroup ? <EditableGroup /> : null}
-          {this.props.allTasks.data.map(task => <Card key={task.id} task={task} />)}
+          {allTasks.map(task => <Card key={task.id} task={task} />)}
         </div>
       </div>
     );
   }
 }
 
-Plan.propTypes = { allTasks: PropTypes.object };
+Plan.propTypes = { allTasks: PropTypes.array };
 
 const dropSpecs = {
   drop: (props, monitor, component) => {
