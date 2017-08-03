@@ -34,7 +34,7 @@ class AddTaskForm extends Component {
     }).then(() => {
       return axios.get('http://localhost:5000/api/tasks');
     }).then(tasks => {
-      this.props.LoadTasksAction(tasks);
+      this.props.LoadTasksAction(tasks.data);
     });
     this.props.closeModal();
   }
