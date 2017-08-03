@@ -1,5 +1,4 @@
 export default function TasksReducer(state = [], action) {
-  console.log('Task reducer called with action type: ', action.type)
   console.log('previous state: ', state)
   let newState = state;
   switch (action.type) {
@@ -13,9 +12,6 @@ export default function TasksReducer(state = [], action) {
         break;
       }
     }
-    console.log('new state: ', newState)
-    console.log(`Reducer told to move item ${action.id} to [${action.left}, ${action.top}]`);
-    // newState = newState.slice(0, 4);
     break;
   default:
     newState = [];
