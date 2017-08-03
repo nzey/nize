@@ -6,12 +6,18 @@ const taskHandler = (req, res) => {
   case 'GET':
     Task.findAll()
     .then(tasks => res.send(tasks))
-    .catch(err => console.log('ERROR getting all tasks: ', err));
+    .catch(err => res.send(`ERROR getting all tasks: ${err}`));
     break;
   case 'POST':
     Task.create(req.body)
     .then(createdTask => res.send(createdTask))
-    .catch(err => console.log('ERROR POSTING: ', err));
+    .catch(err => res.send(`ERROR POSTING: ${err}`));
+    break;
+  case 'PUT':
+    Task.findById(req.body.id)
+    .then(foundTask => foundTask.update({ position: req.body.position }))
+    .then(updatedTask => res.send(`updated task: ${JSON.stringify(updatedTask)}`))
+    .catch(err => res.send(`ERROR updating task position: ${err}`));
     break;
   default:
     break;

@@ -9,12 +9,12 @@ export default function TasksReducer(state = [], action) {
   case 'MOVE_CARD':
     for (let i = 0; i < newState.length; i++) {
       if (newState[i].id === action.id) {
-        newState[i].position = action.position;
+        newState[i].position = `[${action.left}, ${action.top}]`;
         break;
       }
     }
     console.log('new state: ', newState)
-    console.log(`Reducer told to move item ${action.id} to ${JSON.stringify(action.position)}`);
+    console.log(`Reducer told to move item ${action.id} to [${action.left}, ${action.top}]`);
     // newState = newState.slice(0, 4);
     break;
   default:

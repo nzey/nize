@@ -10,7 +10,7 @@ import Types from '../../../constants';
 const cardSource = {
   beginDrag(props) {
     // Return the data describing the dragged item
-    const position = props.task.position || [0, 0];
+    const position = props.task.position ? JSON.parse(props.task.position) : [0, 0];
     const item = { id: props.task.id, left: position[0], top: position[1] };
     return item;
   },
@@ -46,7 +46,8 @@ class Card extends React.Component {
   render() {
     // Your component receives its own props as usual
     let { id, title, position } = this.props.task;
-    position = position || [0, 0];
+    console.log('position in render: ', position)
+    position = position ? JSON.parse(position) : [0, 0];
     // These two props are injected by React DnD,
     // as defined by your `collect` function above:
     const { isDragging, connectDragSource } = this.props;

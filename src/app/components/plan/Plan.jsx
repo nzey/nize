@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Button } from 'semantic-ui-react';
 import { DropTarget } from 'react-dnd';
-// import axios from 'axios';
+import axios from 'axios';
 import Types from '../../constants';
 import Card from '../common/card/Card.jsx';
 import Modal from '../common/modal/Modal.jsx';
@@ -31,15 +31,18 @@ class Plan extends Component {
 
   moveCard(itemId, left, top) {
     // axios call to change position in database
-    // axios.post('/task', { position: `[${left}, ${top}]` })
-    // .then(function (response) {
-    //   console.log(response);
-    // })
-    // .catch(function (error) {
-    //   console.log(error);
-    // }); 
+    axios.put('http://localhost:5000/api/tasks', {
+      id: itemId,
+      position: `[${left}, ${top}]`,
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    }); 
     console.log(`plan's moveCard method called with: [${left}, ${top}]`)
-    this.props.moveCardAction(itemId, [left, top])
+    this.props.moveCardAction(itemId, left, top);
   }
 
   render() {
