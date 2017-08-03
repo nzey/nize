@@ -28,12 +28,8 @@ npm install
 
 ### Start development server with hot reloading
 
-LATER WILL ONLY NEED:
-````
-npm run dev
-````
-
-FOR NOW, need that, and in another shell: `nodemon server/server.js`
+1)  ```npm run dev```
+2) Navigate to http://localhost:3000
 
 ### Testing
 

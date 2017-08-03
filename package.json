@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Single-tasking organization application",
   "scripts": {
-    "dev": "webpack-dev-server --watch --colors",
+    "dev": "webpack-dev-server --watch --colors | nodemon server/server.js",
     "build": "rimraf dist && NODE_ENV=production webpack --colors",
     "start": "NODE_ENV=production PORT=8080 pm2 start ./server.js",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
