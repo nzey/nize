@@ -1,11 +1,14 @@
 import React, { Component, PropTypes } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Button } from 'semantic-ui-react';
 import { DropTarget } from 'react-dnd';
+// import axios from 'axios';
 import Types from '../../constants';
 import Card from '../common/card/Card.jsx';
 import Modal from '../common/modal/Modal.jsx';
 import EditableGroup from '../editableGroup/EditableGroup.jsx';
+import moveCardAction from '../../actions/moveCard.js';
 
 class Plan extends Component {
   constructor(props) {
@@ -26,9 +29,22 @@ class Plan extends Component {
     this.setState({ buildingGroup: !this.state.buildingGroup });
   }
 
+  moveCard(itemId, left, top) {
+    // axios call to change position in database
+    // axios.post('/task', { position: `[${left}, ${top}]` })
+    // .then(function (response) {
+    //   console.log(response);
+    // })
+    // .catch(function (error) {
+    //   console.log(error);
+    // }); 
+    console.log(`plan's moveCard method called with: [${left}, ${top}]`)
+    this.props.moveCardAction(itemId, [left, top])
+  }
+
   render() {
     const { connectDropTarget, allTasks } = this.props;
-
+    
     return connectDropTarget(
       <div className="container plan">
         <Button onClick={this.toggleModal}>Add Task</Button>
@@ -36,7 +52,10 @@ class Plan extends Component {
         <Button onClick={this.toggleBuildingGroup}>Add Group</Button>
         <div className="cardContainer">
           {this.state.buildingGroup ? <EditableGroup /> : null}
-          {allTasks.map(task => <Card key={task.id} task={task} />)}
+          {allTasks.map(task => {
+            console.log('task: ', task);
+            return <Card key={task.id} task={task} />;
+          })}
         </div>
       </div>
     );
@@ -47,16 +66,16 @@ Plan.propTypes = { allTasks: PropTypes.array };
 
 const dropSpecs = {
   drop: (props, monitor, component) => {
-    console.log('compatible item dropped. Good place for flux op');
-    return {
-      droppedItem: monitor.getItem(),
-      initialPos: monitor.getInitialClientOffset(),
-      newPos: monitor.getClientOffset(),
-    };
+    const item = monitor.getItem();
+    const delta = monitor.getDifferenceFromInitialOffset();
+    let left = Math.round(item.left + delta.x);
+    let top = Math.round(item.top + delta.y);
+    left = left >= 0 ? left : 0;
+    top = top >= 0 ? top : 0;
+    component.moveCard(item.id, left, top);
   },
   hover: (props, monitor, component) => console.log('hovering. Can drop? ', monitor.canDrop()),
   canDrop: (props, monitor) => {
-    console.log('canDrop called');
     return true;
   },
 };
@@ -67,8 +86,6 @@ function collect(connect, monitor) {
   };
 }
 
-// pull out cardContainer div into it's own component. 
-// Make that the droptarget.
 const PlanAsDropTarget = DropTarget(Types.CARD, dropSpecs, collect)(Plan);
 
 function mapStateToProps(state) {
@@ -78,8 +95,9 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-  };
+  return bindActionCreators({
+    moveCardAction,
+  }, dispatch);
 }
 
 export default connect(

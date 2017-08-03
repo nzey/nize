@@ -1,8 +1,9 @@
 .cardContainer {
   margin: 15px;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: flex-start;
+  position: relative;
+  // display: flex;
+  // flex-wrap: wrap;
+  // align-content: flex-start;
   overflow: scroll;
   height: 100%;
 }

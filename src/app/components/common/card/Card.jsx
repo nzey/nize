@@ -7,32 +7,25 @@ import Types from '../../../constants';
  * Specifies the drag source contract.
  * Only `beginDrag` function is required.
  */
-const CardActions = {
-  moveCardToList: (itemId, dropResultListId) => {
-    console.log('moveCarToList params: ', itemId, ' and ', dropResultListId);
-  },
-};
-
 const cardSource = {
   beginDrag(props) {
     // Return the data describing the dragged item
-    const item = { id: props.id };
+    const position = props.task.position || [0, 0];
+    const item = { id: props.task.id, left: position[0], top: position[1] };
     return item;
   },
 
   endDrag(props, monitor, component) {
     if (!monitor.didDrop()) {
-      console.log("Can't place there")
       return;
     }
 
     // When dropped on a compatible target, do something
     const item = monitor.getItem();
     const dropResult = monitor.getDropResult();
-    console.log('endDrag, monitor: ', monitor)
-    console.log('endDrag, component: ', component)
-    CardActions.moveCardToList(item, dropResult);
-  }
+    console.log('cardSource endDrag, monitor: ', monitor)
+    console.log('endDragSource endDrag, component: ', component)
+  },
 };
 
 /**
@@ -52,13 +45,13 @@ class Card extends React.Component {
 
   render() {
     // Your component receives its own props as usual
-    const { id, title } = this.props.task;
+    let { id, title, position } = this.props.task;
+    position = position || [0, 0];
     // These two props are injected by React DnD,
     // as defined by your `collect` function above:
     const { isDragging, connectDragSource } = this.props;
-
     return connectDragSource(
-      <div className="card" id={id} style={{ opacity: isDragging ? 0.5 : 1 }}>
+      <div className="card" id={id} style={{ opacity: isDragging ? 0.5 : 1, top: position[1], left: position[0] }}>
         {title}
       </div>
     );
