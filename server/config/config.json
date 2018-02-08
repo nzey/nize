@@ -1,22 +1,16 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "nize_dev",
+    "use_env_variable": "DEV_DB_",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "nize_test",
+    "use_env_variable": "TEST_DB_",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "nize_production",
+    "use_env_variable": "PROD_DB_",
     "host": "127.0.0.1",
     "dialect": "postgres"
   }
