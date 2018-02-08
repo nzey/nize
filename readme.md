@@ -18,17 +18,24 @@ Clone Repo
 git clone https://github.com/nzey/nize
 ````
 
-npm install dependencies
+Install external dependencies
+- Node and NPM
+- PostgreSQL
 
+Install local dependencies
 ````
 cd nize
 
 npm install
 ````
 
-### Start development server with hot reloading
+[Start postgres server](https://www.postgresql.org/docs/9.6/static/server-start.html) if not started:  
+`postgres -D /usr/local/pgsql/data >logfile 2>&1 &`
 
-1)  ```npm run dev```
+
+Start development server with hot reloading:
+`npm run dev`
+
 2) Navigate to http://localhost:3000
 
 ### Testing
