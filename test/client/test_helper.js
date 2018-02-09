@@ -2,20 +2,24 @@
 import _$ from 'jquery';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
-import jsdom from 'jsdom';
+import TestUtils from 'react-dom/test-utils';
+import { JSDOM } from 'jsdom';
 import chai, { expect } from 'chai';
 import chaiJquery from 'chai-jquery';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import reducers from '../src/app/reducers';
+import reducers from '../../src/app/reducers';
 
-global.document = jsdom.jsdom('<!doctype html><html><body></body></html>');
-global.window = global.document.defaultView;
-global.navigator = {
-  userAgent: 'node.js',
-};
+global.window = new JSDOM(
+  '<!doctype html><html><body></body></html>',
+  { 
+    userAgent: 'node.js',
+    runScripts: "dangerously" 
+  }).window;
 
+global.document = window.document
+console.log("CREATE ELEMENT?")
+console.log(window.document.createElement)
 const $ = _$(window);
 
 chaiJquery(chai, chai.util, $);
@@ -27,7 +31,7 @@ function renderComponent(ComponentClass, props = {}, state = {}) {
     </Provider>
   );
 
-  return $(ReactDOM.findDOMNode(componentInstance));
+  rseturn $(ReactDOM.findDOMNode(componentInstance));
 }
 
 $.fn.simulate = function (eventName, value) {

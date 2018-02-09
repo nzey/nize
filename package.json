@@ -6,7 +6,7 @@
     "dev": "webpack-dev-server --watch --colors | nodemon server/server.js",
     "build": "rimraf dist && NODE_ENV=production webpack --colors",
     "start": "NODE_ENV=production PORT=8080 pm2 start ./server.js",
-    "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
+    "test": "mocha --compilers js:babel-core/register --require ./test/client/test_helper.js --recursive ./test",
     "test:watch": "npm run test -- --watch",
     "lint": "eslint src test webpack",
     "repl": "local-repl"
