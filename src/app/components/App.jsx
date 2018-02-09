@@ -10,9 +10,10 @@ import LoadTasksAction from '../actions/LoadTasksAction';
 class App extends Component {
   constructor(props) {
     super(props);
-    axios.get('http://localhost:5000/api/tasks').then(tasks => {
-      this.props.LoadTasksAction(tasks.data);
-    });
+    axios.get('http://localhost:5000/api/tasks').then(
+      tasks => this.props.LoadTasksAction(tasks.data),
+      error => { throw Error(error) }
+    );
   }
 
   render() {
