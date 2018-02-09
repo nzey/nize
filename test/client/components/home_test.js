@@ -1,12 +1,12 @@
 /* eslint-disable no-undef, no-unused-expressions */
 import { renderComponent, expect } from '../test_helper';
-import Card from '../../src/app/components/common/card/Card';
+import Home from '../../../src/app/components/home/Home';
 
-describe('Card', () => {
+describe('Home', () => {
   let component;
 
   beforeEach(() => {
-    component = renderComponent(Card);
+    component = renderComponent(Home);
   });
 
   it('renders something', () => {
