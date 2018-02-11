@@ -21,6 +21,7 @@ git clone https://github.com/nzey/nize
 Install external dependencies
 - Node and NPM
 - PostgreSQL
+- Sequelize CLI (`npm install -g sequelize-cli`)
 
 Install local dependencies
 ````
@@ -32,6 +33,9 @@ npm install
 [Start postgres server](https://www.postgresql.org/docs/9.6/static/server-start.html) if not started:  
 `postgres -D /usr/local/pgsql/data >logfile 2>&1 &`
 
+Clear and Seed database
+`sequelize db:seed:undo:all`
+`sequelize db:seed:all`
 
 Start development server with hot reloading:
 `npm run dev`

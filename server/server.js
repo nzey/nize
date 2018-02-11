@@ -23,9 +23,6 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
-// seed db
-require('./seeders/tasks.js')(db);
-
 app.listen(port, () => {
   console.log('app listening on', port);
 });
