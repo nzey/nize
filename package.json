@@ -1,12 +1,12 @@
 {
-  "name": "ttt",
+  "name": "nize",
   "version": "1.0.0",
   "description": "Single-tasking organization application",
   "scripts": {
     "dev": "webpack-dev-server --watch --colors | nodemon server/server.js",
     "build": "rimraf dist && NODE_ENV=production webpack --colors",
     "start": "NODE_ENV=production PORT=8080 pm2 start ./server.js",
-    "test": "mocha --compilers js:babel-core/register --require ./test/client/test_helper.js --recursive ./test",
+    "test": "mocha --compilers js:babel-core/register --require babel-polyfill ./test/test_helper.js --recursive ./test",
     "test:watch": "npm run test -- --watch",
     "lint": "eslint src test webpack",
     "repl": "local-repl"
@@ -32,6 +32,8 @@
     "eslint-plugin-jsx-a11y": "^1.2.0",
     "eslint-plugin-react": "^5.1.1",
     "extract-text-webpack-plugin": "^1.0.1",
+    "factory-girl": "^5.0.2",
+    "faker": "^4.1.0",
     "html-webpack-plugin": "^2.16.1",
     "jquery": "^2.2.3",
     "jsdom": "^10.0.0",
@@ -48,6 +50,8 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "babel-polyfill": "^6.26.0",
+    "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "dotenv": "^5.0.0",
@@ -63,7 +67,7 @@
     "react-router": "^3.2.0",
     "redux": "^3.7.2",
     "semantic-ui-react": "^0.70.0",
-    "sequelize": "^3.31.1"
+    "sequelize": "^4.33.2"
   },
   "repl": [
     {

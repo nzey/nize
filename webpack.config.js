@@ -39,10 +39,12 @@ var webpackConfig = {
 // Entry points
 // ------------------------------------------
 webpackConfig.entry = !isProduction
-  ? ['webpack-dev-server/client?http://localhost:' + port,
+  ? ['babel-polyfill', 
+     'webpack-dev-server/client?http://localhost:' + port,
      'webpack/hot/dev-server',
      Path.join(__dirname, './src/app/index')]
-  : [Path.join(__dirname, './src/app/index')];
+  : ['babel-polyfill', 
+      Path.join(__dirname, './src/app/index')];
 
 // ------------------------------------------
 // Bundle output

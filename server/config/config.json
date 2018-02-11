@@ -2,16 +2,20 @@
   "development": {
     "use_env_variable": "DEV_DB_",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "operatorsAliases": false
   },
   "test": {
     "use_env_variable": "TEST_DB_",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "operatorsAliases": false
   },
   "production": {
     "use_env_variable": "PROD_DB_",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "operatorsAliases": false
+
   }
 }

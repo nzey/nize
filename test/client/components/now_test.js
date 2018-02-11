@@ -1,5 +1,5 @@
 /* eslint-disable no-undef, no-unused-expressions */
-import { renderComponent, expect } from '../test_helper';
+import { renderComponent, expect } from '../../test_helper';
 import Now from '../../../src/app/components/now/Now';
 
 describe('Now', () => {

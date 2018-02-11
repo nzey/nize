@@ -1,5 +1,5 @@
 /* eslint-disable no-undef, no-unused-expressions */
-import { renderComponent, expect } from '../test_helper';
+import { renderComponent, expect } from '../../test_helper';
 import Today from '../../../src/app/components/today/Today';
 
 describe('Today', () => {
