@@ -3,20 +3,10 @@ const path = require('path');
 const Sequelize = require('sequelize');
 const basename = path.basename(module.filename);
 const env = process.env.NODE_ENV || 'development';
-const config = require(`${__dirname}/../config/config.json`)[env];
+const config = require(`${__dirname}/../config/config`)[env];
 const db = {};
 
-let sequelize;
-if (config.use_env_variable) {
-  let prefix = config.use_env_variable
-  sequelize = new Sequelize(
-    process.env[`${prefix}NAME`], process.env[`${prefix}USER`], process.env[`${prefix}PASSWORD`], config
-  );
-} else {
-  sequelize = new Sequelize(
-    config.database, config.username, config.password, config
-  );
-}
+const sequelize = new Sequelize(config)
 
 fs
   .readdirSync(__dirname)
