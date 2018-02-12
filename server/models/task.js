@@ -9,8 +9,8 @@ module.exports = function(sequelize, DataTypes) {
     description: DataTypes.STRING,
     position: DataTypes.STRING, // e.g. "[0, 0]" or "[50, 100]"
     notes: DataTypes.STRING,
-    estimatedTime: { // 00:15, 1:30, etc
-      type: DataTypes.STRING,
+    estimatedTime: { // in minutes
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     estimateConfidence: {
