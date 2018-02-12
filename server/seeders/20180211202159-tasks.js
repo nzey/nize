@@ -2,11 +2,12 @@
 
 const faker = require('faker');
 const Sequelize = require('sequelize');
+const rand_5 = require('../../helpers/numbers').rand_5
 
 const mockTask = () => {
   return {
     title: faker.lorem.words(), 
-    estimatedTime: "00:15", 
+    estimatedTime: rand_5(1, 480), 
     estimateConfidence: 70,
     createdAt: Sequelize.literal('CURRENT_TIMESTAMP'),
     updatedAt: Sequelize.literal('CURRENT_TIMESTAMP')
