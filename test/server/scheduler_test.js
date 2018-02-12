@@ -1,6 +1,6 @@
 /* eslint-disable no-undef, no-unused-expressions */
-import { buildAgenda } from '../../server/scheduler'
-import chai, { expect } from 'chai'
+import { buildAgenda } from '../../server/scheduler';
+import chai, { expect } from 'chai';
 import { factory } from '../test_helper';
 
 describe('buildAgenda', () => {

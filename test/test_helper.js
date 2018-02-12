@@ -6,18 +6,17 @@ import TestUtils from 'react-dom/test-utils';
 import { JSDOM } from 'jsdom';
 import chai, { expect } from 'chai';
 import chaiJquery from 'chai-jquery';
-import dotenv from 'dotenv';
 import { factory } from 'factory-girl';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import reducers from '../src/app/reducers';
-import path from 'path'
+import path from 'path';
 
 // Load factories (https://github.com/aexmachina/factory-girl)
 
 // TODO: Maybe use glob or require-dir pckg instead (https://stackoverflow.com/questions/5364928/node-js-require-all-files-in-a-folder)
-const normalizedPath = path.join(__dirname, "factories");
-require("fs").readdirSync(normalizedPath).forEach(function(file) {
+const normalizedPath = path.join(__dirname, 'factories');
+require('fs').readdirSync(normalizedPath).forEach(file => {
   require(path.join(normalizedPath, file));
 });
 

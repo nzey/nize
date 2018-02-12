@@ -1,7 +1,6 @@
 const faker = require('faker');
 
-const rand_5 = (min, max) => {
-  return Math.floor(faker.random.number({ min: min, max: max }) / 5) * 5
-}
+const rand5 = (min, max) =>
+  Math.floor(faker.random.number({ min, max }) / 5) * 5;
 
-module.exports = { rand_5 }
+module.exports = { rand5 };
