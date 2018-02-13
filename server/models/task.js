@@ -22,25 +22,24 @@ module.exports = (sequelize, DataTypes) => {
     deadline: DataTypes.DATE,
     specificTime: DataTypes.DATE, // if a task must be done at a specific time/date
     recurrence: DataTypes.STRING, // '#/[min, hr, wk, month, m, m-t, m-t-w, etc]'
-  }, {
-    classMethods: {
-      associate: (models) => {
-        Task.belongsTo(models.Type, {
-          foreignKey: 'typeId',
-        });
-        Task.belongsTo(models.Resource, {
-          foreignKey: 'resourceId',
-        });
-        Task.hasMany(models.Dependency, {
-          foreignKey: 'taskId',
-          as: 'dependencies',
-        });
-        Task.hasMany(models.UserTask, {
-          foreignKey: 'taskId',
-          as: 'usertasks',
-        });
-      },
-    },
   });
+
+  // Class Methods
+  Task.associate = (models) => {
+    Task.belongsTo(models.Type, {
+      foreignKey: 'typeId',
+    });
+    Task.belongsTo(models.Resource, {
+      foreignKey: 'resourceId',
+    });
+    Task.hasMany(models.Dependency, {
+      foreignKey: 'taskId',
+      as: 'dependencies',
+    });
+    Task.hasMany(models.UserTask, {
+      foreignKey: 'taskId',
+      as: 'usertasks',
+    });
+  };
   return Task;
 };
