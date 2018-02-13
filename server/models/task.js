@@ -22,6 +22,10 @@ module.exports = (sequelize, DataTypes) => {
     deadline: DataTypes.DATE,
     specificTime: DataTypes.DATE, // if a task must be done at a specific time/date
     recurrence: DataTypes.STRING, // '#/[min, hr, wk, month, m, m-t, m-t-w, etc]'
+  }, {
+    scopes: {
+      elders: { where: { parentId: null } },
+    },
   });
 
   // Class Methods
