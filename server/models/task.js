@@ -26,13 +26,10 @@ module.exports = (sequelize, DataTypes) => {
 
   // Class Methods
   Task.associate = (models) => {
+    // allows Task.setChildren(), task.getChildren()
     Task.hasMany(models.Task, {
       foreignKey: 'parentId',
       as: 'children',
-    });
-    Task.hasOne(models.Task, {
-      foreignKey: 'parentId',
-      as: 'parent',
     });
     Task.belongsTo(models.Type, {
       foreignKey: 'typeId',
