@@ -4,7 +4,8 @@ const Task = db.Task;
 const taskHandler = (req, res) => {
   switch (req.method) {
     case 'GET':
-      Task.findAll()
+      const parentId = req.query.parent_id ? req.query.parent_id : null;
+      Task.findAll({ where: { parentId } })
       .then(tasks => res.send(tasks))
       .catch(err => res.send(`ERROR getting all tasks: ${err}`));
       break;

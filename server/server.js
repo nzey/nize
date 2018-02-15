@@ -14,7 +14,7 @@ app.use(cors());
 app.use(express.static('./'));
 app.use(express.static('dist'));
 
-app.get('/api/tasks', handlers.taskHandler);
+app.get('/api/tasks/', jsonParser, handlers.taskHandler);
 app.post('/api/tasks', jsonParser, handlers.taskHandler);
 app.put('/api/tasks', jsonParser, handlers.taskHandler);
 
