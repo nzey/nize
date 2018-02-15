@@ -74,6 +74,10 @@
     {
       "name": "h",
       "module": "./server/handlers.js"
+    },
+    {
+      "name": "m",
+      "module": "./server/models/index.js"
     }
   ]
 }
