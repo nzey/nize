@@ -1,8 +1,11 @@
+import axios from 'axios';
+import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 
 import App from './components/App';
 import Home from './components/home/Home';
@@ -10,15 +13,14 @@ import Plan from './components/plan/Plan';
 import Today from './components/today/Today';
 import Now from './components/now/Now';
 import Review from './components/review/Review';
-import axios from 'axios';
-import reducers from './reducers';
+import rootReducers from './reducers/index';
 
 import './components/bundle.scss';
 
 axios.defaults.baseURL = 'http://localhost:5000/api/';
 
-const createStoreWithMiddleware = applyMiddleware()(createStore);
-const store = createStoreWithMiddleware(reducers);
+const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
+const store = createStoreWithMiddleware(rootReducers);
 
 ReactDOM.render(
   <Provider store={store}>
