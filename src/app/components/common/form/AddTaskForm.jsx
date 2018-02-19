@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -27,11 +28,13 @@ class AddTaskForm extends Component {
     this.setState(Object.assign(this.state, newState));
   }
 
-  handleSubmit() {
+  handleSubmit(e) {
+    const timeAsMinutes = moment.duration(this.state.estimatedTime, 'hh:mm').asMinutes();
+    const data = Object.assign({}, this.state, { estimatedTime: timeAsMinutes });
     axios({
       method: 'POST',
       url: 'http://localhost:5000/api/tasks',
-      data: this.state,
+      data,
     }).then(() => {
       return axios.get('/tasks');
     }).then(tasks => {
