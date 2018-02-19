@@ -16,6 +16,7 @@ class AddTaskForm extends Component {
       description: '',
       estimatedTime: '',
       estimateConfidence: null,
+      parentId: this.props.parent,
     };
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -38,7 +39,7 @@ class AddTaskForm extends Component {
     }).then(() => {
       return axios.get('/tasks');
     }).then(tasks => {
-      this.props.loadTasks();
+      this.props.loadTasks(this.props.parent);
     });
     this.props.closeModal();
   }
@@ -80,7 +81,7 @@ AddTaskForm.propTypes = {
 };
 
 function mapStateToProps(state) {
-  return {};
+  return { parent: state.parent };
 }
 
 function mapDispatchToProps(dispatch) {

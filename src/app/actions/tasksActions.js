@@ -14,3 +14,7 @@ export function loadTasks(parentId) {
 export function loadTasksSuccess(tasks) {  
   return { type: types.LOAD_TASKS_SUCCESS, tasks };
 }
+
+export function setCurrentView(parentId) {
+  return { type: types.SET_CURRENT_VIEW, parentId };
+}

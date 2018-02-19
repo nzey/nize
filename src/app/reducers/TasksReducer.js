@@ -7,7 +7,7 @@ export default function TasksReducer(state = initialState.tasks, action) {
   switch (action.type) {
     case types.LOAD_TASKS_SUCCESS:
       return action.tasks;
-    case types.MOVE_CARD:
+    case types.MOVE_CARD: // TODO: this should be in it's own reducer for one task/card
       for (let i = 0; i < newState.length; i++) {
         if (newState[i].id === action.id) {
           newState[i].position = `[${action.left}, ${action.top}]`;

@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
 import TasksReducer from './TasksReducer.js';
+import ParentViewReducer from './ParentViewReducer.js';
 
 const rootReducer = combineReducers({
   state: (state = {}) => state,
-  allTasks: TasksReducer,
+  tasks: TasksReducer,
+  parent: ParentViewReducer,
 });
 
 export default rootReducer;

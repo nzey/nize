@@ -83,7 +83,7 @@ Plan.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    allTasks: state.allTasks,
+    allTasks: state.tasks,
   };
 }
 
