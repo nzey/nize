@@ -1,19 +1,21 @@
-export default function TasksReducer(state = [], action) {
-  let newState = state;
+import * as types from '../actions/actionTypes';
+import initialState from './initialState';
+
+export default function TasksReducer(state = initialState.tasks, action) {
+  const newState = state;
+
   switch (action.type) {
-    case 'LOAD_TASKS':
-      newState = action.tasks;
-      break;
-    case 'MOVE_CARD':
+    case types.LOAD_TASKS_SUCCESS:
+      return action.tasks;
+    case types.MOVE_CARD:
       for (let i = 0; i < newState.length; i++) {
         if (newState[i].id === action.id) {
           newState[i].position = `[${action.left}, ${action.top}]`;
           break;
         }
       }
-      break;
+      return newState;
     default:
-      newState = [];
+      return state;
   }
-  return newState;
 }
