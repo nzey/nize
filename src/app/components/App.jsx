@@ -6,15 +6,12 @@ import axios from 'axios';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
 import Header from './common/Header';
-import LoadTasksAction from '../actions/LoadTasksAction';
+import { loadTasks } from '../actions/tasksActions';
 
 class App extends Component {
   constructor(props) {
     super(props);
-    axios.get("/tasks/?parent_id=").then(
-      tasks => this.props.LoadTasksAction(tasks.data),
-      error => { throw Error(error); }
-    );
+    this.props.loadTasks();
   }
 
   render() {
@@ -38,7 +35,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    LoadTasksAction,
+    loadTasks,
   }, dispatch);
 }
 

@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { Button, Dropdown, Form } from 'semantic-ui-react';
 import axios from 'axios';
 import { timeOptions, confidenceOptions } from './options';
-import LoadTasksAction from '../../../actions/LoadTasksAction';
+import { loadTasks } from '../../../actions/tasksActions';
 
 class AddTaskForm extends Component {
   constructor(props) {
@@ -32,9 +32,11 @@ class AddTaskForm extends Component {
       method: 'POST',
       url: 'http://localhost:5000/api/tasks',
       data: this.state,
-    }).then(() => axios.get('/tasks'))
-      .then(tasks => this.props.LoadTasksAction(tasks.data));
-
+    }).then(() => {
+      return axios.get('/tasks');
+    }).then(tasks => {
+      this.props.loadTasks();
+    });
     this.props.closeModal();
   }
 
@@ -80,7 +82,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    LoadTasksAction,
+    loadTasks,
   }, dispatch);
 }
 
