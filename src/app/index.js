@@ -10,10 +10,12 @@ import Plan from './components/plan/Plan';
 import Today from './components/today/Today';
 import Now from './components/now/Now';
 import Review from './components/review/Review';
-
+import axios from 'axios';
 import reducers from './reducers';
 
 import './components/bundle.scss';
+
+axios.defaults.baseURL = 'http://localhost:5000/api/';
 
 const createStoreWithMiddleware = applyMiddleware()(createStore);
 const store = createStoreWithMiddleware(reducers);

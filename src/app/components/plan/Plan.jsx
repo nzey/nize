@@ -25,7 +25,7 @@ class Plan extends Component {
 
   moveCard(itemId, left, top) {
     // axios call to change position in database
-    axios.put('http://localhost:5000/api/tasks', {
+    axios.put('/tasks', {
       id: itemId,
       position: `[${left}, ${top}]`,
     })
