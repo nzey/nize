@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Breadcrumb, { Button } from 'semantic-ui-react';
+import { Button } from 'semantic-ui-react';
 import { DropTarget } from 'react-dnd';
 import axios from 'axios';
 import Types from '../../constants';
