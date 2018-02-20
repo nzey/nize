@@ -5,7 +5,7 @@ import ParentViewReducer from './ParentViewReducer.js';
 const rootReducer = combineReducers({
   state: (state = {}) => state,
   tasks: TasksReducer,
-  parent: ParentViewReducer,
+  parents: ParentViewReducer,
 });
 
 export default rootReducer;

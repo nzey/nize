@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Button } from 'semantic-ui-react';
+import Breadcrumb, { Button } from 'semantic-ui-react';
 import { DropTarget } from 'react-dnd';
 import axios from 'axios';
 import Types from '../../constants';
 import Card from '../common/card/Card.jsx';
 import Modal from '../common/modal/Modal.jsx';
 import moveCardAction from '../../actions/moveCard.js';
+import { loadTasks } from '../../actions/tasksActions.js';
 
 class Plan extends Component {
   constructor(props) {
@@ -34,11 +35,25 @@ class Plan extends Component {
     this.props.moveCardAction(itemId, left, top);
   }
 
+  // handleCrumbClick(parent = null) {
+  //   if (parent?) {
+  //     this.props.setCurrentView(parent);
+  //     this.props.loadTasks(parent.id); 
+  //   } else {
+
+  //   }
+  // }
   render() {
-    const { connectDropTarget, allTasks } = this.props;
-    
+    const { connectDropTarget, allTasks, parents } = this.props;
+    console.log(`THESE ARE THE PARENT: ${parents}`);
     return connectDropTarget(
       <div className="container plan">
+        <div> 
+          { parents.length ? <span id='-1' onClick={ () => this.props.loadTasks() }>TOP</span> : null }  
+          { parents.map(parent => {
+            return <span id={parent.id} onClick={() => this.props.loadTasks(parent.id)}>{parent.title}</span>}) 
+          }
+        </div>
         <Button onClick={this.toggleModal}>Add Task</Button>
         <Modal type="addTask" isOpen={this.state.modalIsOpen} closeModal={this.toggleModal} />
         <div className="cardContainer">
@@ -84,12 +99,14 @@ Plan.propTypes = {
 function mapStateToProps(state) {
   return {
     allTasks: state.tasks,
+    parents: state.parents,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     moveCardAction,
+    loadTasks,
   }, dispatch);
 }
 

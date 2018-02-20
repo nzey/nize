@@ -41,16 +41,17 @@ class Card extends React.Component {
   handle(e, parent) {
     if (e.shiftKey) {
       this.props.setCurrentView(parent);
-      this.props.loadTasks(parent);
+      this.props.loadTasks(parent.id);
     }
   }
 
   render() {
     let { id, title, position } = this.props.task;
+    console.log('position in render: ', position);
     position = position ? JSON.parse(position) : [0, 0];
     const { isDragging, connectDragSource } = this.props;
     return connectDragSource(
-      <div onClick={(e) => this.handle(e, id)} className="card" id={id} style={{ opacity: isDragging ? 0.5 : 1, top: position[1], left: position[0] }}>
+      <div onClick={(e) => this.handle(e, { id, title })} className="card" id={id} style={{ opacity: isDragging ? 0.5 : 1, top: position[1], left: position[0] }}>
         {title}
       </div>
     );

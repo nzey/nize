@@ -7,6 +7,7 @@ import { Button, Dropdown, Form } from 'semantic-ui-react';
 import axios from 'axios';
 import { timeOptions, confidenceOptions } from './options';
 import { loadTasks } from '../../../actions/tasksActions';
+import { last } from 'lodash/array';
 
 class AddTaskForm extends Component {
   constructor(props) {
@@ -16,7 +17,7 @@ class AddTaskForm extends Component {
       description: '',
       estimatedTime: '',
       estimateConfidence: null,
-      parentId: this.props.parent,
+      parentId: this.props.parent ? this.props.parent.id : '',
     };
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -81,7 +82,7 @@ AddTaskForm.propTypes = {
 };
 
 function mapStateToProps(state) {
-  return { parent: state.parent };
+  return { parent: last(state.parents) };
 }
 
 function mapDispatchToProps(dispatch) {
