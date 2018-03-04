@@ -10,6 +10,7 @@ import Card from '../common/card/Card.jsx';
 import Modal from '../common/modal/Modal.jsx';
 import moveCardAction from '../../actions/moveCard.js';
 import { loadTasks, setCurrentView } from '../../actions/tasksActions.js';
+import Breadcrumb from '../common/breadcrumb/Breadcrumb.jsx';
 
 class Plan extends Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class Plan extends Component {
       modalIsOpen: false,
     };
     this.toggleModal = this.toggleModal.bind(this);
+    this.handleCrumbClick = this.handleCrumbClick.bind(this);
   }
 
   toggleModal() {
@@ -44,12 +46,7 @@ class Plan extends Component {
     const { connectDropTarget, allTasks, parents } = this.props;
     return parents ? connectDropTarget(
       <div className="container plan">
-        <div>
-          { parents.map(parent => {
-            return parent ? <span key={parent.id} onClick={() => this.handleCrumbClick(parent)}>{parent.title}</span> : null; })
-          }
-        </div>
-        
+        {parents ? <Breadcrumb parents={parents} handleClick={this.handleCrumbClick} /> : null}
         <Button onClick={this.toggleModal}>Add Task</Button>
         <Modal type="addTask" isOpen={this.state.modalIsOpen} closeModal={this.toggleModal} />
 
@@ -89,6 +86,7 @@ const PlanAsDropTarget = DropTarget(Types.CARD, dropSpecs, collect)(Plan);
 
 Plan.propTypes = {
   allTasks: PropTypes.array,
+  parents: PropTypes.array,
   moveCardAction: PropTypes.func.isRequired,
   connectDropTarget: PropTypes.func.isRequired,
 };
