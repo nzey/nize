@@ -17,7 +17,6 @@ class AddTaskForm extends Component {
       description: '',
       estimatedTime: '',
       estimateConfidence: null,
-      parentId: this.props.parent ? this.props.parent.id : '',
     };
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -32,16 +31,8 @@ class AddTaskForm extends Component {
 
   handleSubmit(e) {
     const timeAsMinutes = moment.duration(this.state.estimatedTime, 'hh:mm').asMinutes();
-    const data = Object.assign({}, this.state, { estimatedTime: timeAsMinutes });
-    axios({
-      method: 'POST',
-      url: 'http://localhost:5000/api/tasks',
-      data,
-    }).then(() => {
-      return axios.get('/tasks');
-    }).then(tasks => {
-      this.props.loadTasks(this.props.parent.id);
-    });
+    const data = Object.assign({}, this.state, { parentId: this.props.parentId, estimatedTime: timeAsMinutes });
+    axios.post('/tasks', data).then(() => this.props.loadTasks(this.props.parentId));
     this.props.closeModal();
   }
 
@@ -77,12 +68,18 @@ class AddTaskForm extends Component {
 
 
 AddTaskForm.propTypes = {
-  LoadTasksAction: PropTypes.func.isRequired,
+  loadTasks: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
+  parentId: PropTypes.number,
+};
+
+const getParentId = (state) => {
+  const parent = last(state.parents);
+  return parent ? parent.id : null;
 };
 
 function mapStateToProps(state) {
-  return { parent: last(state.parents) };
+  return { parentId: getParentId(state) };
 }
 
 function mapDispatchToProps(dispatch) {
