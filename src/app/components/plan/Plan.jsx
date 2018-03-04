@@ -37,18 +37,18 @@ class Plan extends Component {
     this.props.moveCardAction(itemId, left, top);
   }
 
-  handleCrumbClick(parent) {
-    this.props.setCurrentView(parent);
-    this.props.loadTasks(parent.id);
+  handleCrumbClick(crumb) {
+    this.props.setCurrentView(crumb);
+    this.props.loadTasks(crumb.id);
   }
 
   render() {
-    const { connectDropTarget, allTasks, parents } = this.props;
-    return parents ? connectDropTarget(
+    const { connectDropTarget, allTasks, crumbs } = this.props;
+    return crumbs ? connectDropTarget(
       <div className="container plan">
         <div className="planTools">
           <Button id='addTask' onClick={this.toggleModal}>Add Task</Button>
-          {parents ? <Breadcrumb parents={parents} handleClick={this.handleCrumbClick} /> : null}
+          {crumbs ? <Breadcrumb crumbs={crumbs} handleClick={this.handleCrumbClick} /> : null}
           <Modal type="addTask" isOpen={this.state.modalIsOpen} closeModal={this.toggleModal} />
         </div>
         <div className="cardContainer">
@@ -87,7 +87,7 @@ const PlanAsDropTarget = DropTarget(Types.CARD, dropSpecs, collect)(Plan);
 
 Plan.propTypes = {
   allTasks: PropTypes.array,
-  parents: PropTypes.array,
+  crumbs: PropTypes.array,
   moveCardAction: PropTypes.func.isRequired,
   connectDropTarget: PropTypes.func.isRequired,
 };
@@ -95,7 +95,7 @@ Plan.propTypes = {
 function mapStateToProps(state) {
   return {
     allTasks: state.tasks,
-    parents: state.parents,
+    crumbs: state.crumbs,
   };
 }
 

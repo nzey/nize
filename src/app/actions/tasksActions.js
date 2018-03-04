@@ -15,6 +15,6 @@ export function loadTasksSuccess(tasks) {
   return { type: types.LOAD_TASKS_SUCCESS, tasks };
 }
 
-export function setCurrentView(parent) {
-  return { type: types.SET_CURRENT_VIEW, parent };
+export function setCurrentView(crumb) {
+  return { type: types.SET_CURRENT_VIEW, crumb };
 }

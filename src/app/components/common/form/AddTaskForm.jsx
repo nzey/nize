@@ -31,8 +31,8 @@ class AddTaskForm extends Component {
 
   handleSubmit(e) {
     const timeAsMinutes = moment.duration(this.state.estimatedTime, 'hh:mm').asMinutes();
-    const data = Object.assign({}, this.state, { parentId: this.props.parentId, estimatedTime: timeAsMinutes });
-    axios.post('/tasks', data).then(() => this.props.loadTasks(this.props.parentId));
+    const data = Object.assign({}, this.state, { parentId: this.props.projectId, estimatedTime: timeAsMinutes });
+    axios.post('/tasks', data).then(() => this.props.loadTasks(this.props.projectId));
     this.props.closeModal();
   }
 
@@ -66,16 +66,16 @@ class AddTaskForm extends Component {
 AddTaskForm.propTypes = {
   loadTasks: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
-  parentId: PropTypes.number,
+  projectId: PropTypes.number,
 };
 
-const getParentId = (state) => {
-  const parent = last(state.parents);
-  return parent ? parent.id : null;
+const getCurrentCrumb = (state) => {
+  const project = last(state.crumbs);
+  return project ? project.id : null;
 };
 
 function mapStateToProps(state) {
-  return { parentId: getParentId(state) };
+  return { projectId: getCurrentCrumb(state) };
 }
 
 function mapDispatchToProps(dispatch) {
