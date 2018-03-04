@@ -35,50 +35,22 @@ function collect(connect, monitor) {
   };
 }
 
-class Card extends React.Component {
-
-  handle(e, parent) {
-    if (e.shiftKey) {
-      this.props.setCurrentView(parent);
-      this.props.loadTasks(parent.id);
-    }
-  }
-
-  render() {
-    let { id, title, position } = this.props.task;
-    console.log('position in render: ', position);
-    position = position ? JSON.parse(position) : [0, 0];
-    const { isDragging, connectDragSource } = this.props;
-    return connectDragSource(
-      <div onClick={(e) => this.handle(e, { id, title })} className="card" id={id} style={{ opacity: isDragging ? 0.5 : 1, top: position[1], left: position[0] }}>
-        {title}
-      </div>
-    );
-  }
-}
+const Card = ({ task, handleClick, isDragging, connectDragSource }) => {
+  const { id, title, position } = task;
+  const [x, y] = position ? JSON.parse(position) : [0, 0];
+  return connectDragSource(
+    <div onClick={(e) => handleClick(e, { id, title })} className="card" id={id} style={{ opacity: isDragging ? 0.5 : 1, top: y, left: x }}>
+      {title}
+    </div>
+  );
+};
 
 Card.propTypes = {
   task: PropTypes.object.isRequired,
   isDragging: PropTypes.bool.isRequired,
   connectDragSource: PropTypes.func.isRequired,
   DragSource: PropTypes.func,
-  setCurrentView: PropTypes.func.isRequired,
-  loadTasks: PropTypes.func.isRequired,
+  handleClick: PropTypes.func.isRequired,
 };
 
-function mapStateToProps(state) {
-  return {};
-}
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    loadTasks,
-    setCurrentView,
-  }, dispatch);
-}
-
-// Export the wrapped version
-export default DragSource(Types.CARD, cardSource, collect)(connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Card));
+export default DragSource(Types.CARD, cardSource, collect)(Card);

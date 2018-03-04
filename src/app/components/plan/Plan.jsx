@@ -20,6 +20,7 @@ class Plan extends Component {
     };
     this.toggleModal = this.toggleModal.bind(this);
     this.handleCrumbClick = this.handleCrumbClick.bind(this);
+    this.handleCardClick = this.handleCardClick.bind(this);
   }
 
   toggleModal() {
@@ -43,6 +44,13 @@ class Plan extends Component {
     this.props.loadTasks(crumb.id);
   }
 
+  handleCardClick(e, parent) {
+    if (e.shiftKey) {
+      this.props.setCurrentView(parent);
+      this.props.loadTasks(parent.id);
+    }
+  }
+
   render() {
     const { connectDropTarget, allTasks, crumbs } = this.props;
     return crumbs ? connectDropTarget(
@@ -54,7 +62,7 @@ class Plan extends Component {
         </div>
         <div className="cardContainer">
           {allTasks.map(task => {
-            return <Card key={task.id} task={task} />;
+            return <Card key={task.id} task={task} handleClick={this.handleCardClick} />;
           })}
         </div>
 
