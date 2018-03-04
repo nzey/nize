@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    source: DataTypes.STRING,
+    source: DataTypes.STRING, // url string
   }, {
     classMethods: {
       associate: (models) => {

@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
     Task.belongsTo(models.Type);
     Task.belongsTo(models.Resource);
     Task.belongsTo(models.Group);
-    Task.hasMany(models.UserTask);
+    Task.belongsToMany(models.User, { through: 'UserTask' });
   };
   return Task;
 };
