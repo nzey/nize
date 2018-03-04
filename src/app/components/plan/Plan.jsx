@@ -8,26 +8,19 @@ import axios from 'axios';
 import Types from '../../constants';
 import Card from '../common/card/Card.jsx';
 import Modal from '../common/modal/Modal.jsx';
-import EditableGroup from '../editableGroup/EditableGroup.jsx';
 import moveCardAction from '../../actions/moveCard.js';
 
 class Plan extends Component {
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       modalIsOpen: false,
-      buildingGroup: false,
     };
     this.toggleModal = this.toggleModal.bind(this);
-    this.toggleBuildingGroup = this.toggleBuildingGroup.bind(this);
   }
 
   toggleModal() {
     this.setState({ modalIsOpen: !this.state.modalIsOpen });
-  }
-
-  toggleBuildingGroup() {
-    this.setState({ buildingGroup: !this.state.buildingGroup });
   }
 
   moveCard(itemId, left, top) {
@@ -53,9 +46,7 @@ class Plan extends Component {
       <div className="container plan">
         <Button onClick={this.toggleModal}>Add Task</Button>
         <Modal type="addTask" isOpen={this.state.modalIsOpen} closeModal={this.toggleModal} />
-        <Button onClick={this.toggleBuildingGroup}>Add Group</Button>
         <div className="cardContainer">
-          {this.state.buildingGroup ? <EditableGroup /> : null}
           {allTasks.map(task => {
             console.log('task: ', task);
             return <Card key={task.id} task={task} />;
