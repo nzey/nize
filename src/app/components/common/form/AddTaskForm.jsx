@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Button, Dropdown, Form } from 'semantic-ui-react';
 import axios from 'axios';
-import { timeOptions, confidenceOptions } from './options';
+import { timeOptions } from './options';
 import { loadTasks } from '../../../actions/tasksActions';
 import { last } from 'lodash/array';
 
@@ -54,10 +54,6 @@ class AddTaskForm extends Component {
         <Form.Field>
           <label>Estimate the time it will take you to complete this task</label>
           <Dropdown name='estimatedTime' placeholder='Time Estimate' onChange={this.handleInput} fluid search selection options={timeOptions} />
-        </Form.Field>
-        <Form.Field>
-          <label>How confident are you in this time estimate?</label>
-          <Dropdown name='estimateConfidence' placeholder='% confidence' onChange={this.handleInput} fluid search selection options={confidenceOptions} />
         </Form.Field>
         <Button type='submit'>Add</Button>
         <Button type='submit'>Cancel</Button>

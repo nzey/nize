@@ -12,10 +12,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    estimateConfidence: {
-      type: DataTypes.INTEGER, // 30 means 30%, etc..INTEGER, // 30 means 30%, etc.
-      allowNull: false,
-    },
     groupPosition: DataTypes.INTEGER,
     actualTime: DataTypes.FLOAT,
     dateStarted: DataTypes.DATE,

@@ -7,7 +7,6 @@ const mockTask = () => {
   return {
     title: faker.lorem.words(),
     estimatedTime: rand5(1, 480),
-    estimateConfidence: 70,
     createdAt: Sequelize.literal('CURRENT_TIMESTAMP'),
     updatedAt: Sequelize.literal('CURRENT_TIMESTAMP'),
   };

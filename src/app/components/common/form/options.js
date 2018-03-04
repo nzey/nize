@@ -9,22 +9,8 @@ const timeOptions = [
   { key: '2', value: '02:00', text: '02:00' },
 ];
 
-const confidenceOptions = [
-  { key: '10', value: '10', text: '10' },
-  { key: '20', value: '20', text: '20' },
-  { key: '30', value: '30', text: '30' },
-  { key: '40', value: '40', text: '40' },
-  { key: '50', value: '50', text: '50' },
-  { key: '60', value: '60', text: '60' },
-  { key: '70', value: '70', text: '70' },
-  { key: '80', value: '80', text: '80' },
-  { key: '90', value: '90', text: '90' },
-  { key: '100', value: '100', text: '100' },
-];
-
 
 module.exports = {
   timeOptions,
-  confidenceOptions,
 };
 
