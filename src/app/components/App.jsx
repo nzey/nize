@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
 import Header from './common/Header';
-import { loadTasks } from '../actions/tasksActions';
+import { loadTasks } from '../actions/TasksActions';
 
 class App extends Component {
   constructor(props) {

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Header, Modal } from 'semantic-ui-react';
 import AddTaskForm from '../form/AddTaskForm.jsx';
 
@@ -22,5 +23,11 @@ const ModalController = (props) => (
     </Modal.Content>
   </Modal>
 );
+
+ModalController.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  type: PropTypes.string,
+  closeModal: PropTypes.func.isRequired,
+};
 
 export default ModalController;

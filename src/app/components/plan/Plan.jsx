@@ -8,8 +8,8 @@ import axios from 'axios';
 import Types from '../../constants';
 import Card from '../common/card/Card.jsx';
 import Modal from '../common/modal/Modal.jsx';
-import moveCardAction from '../../actions/moveCard.js';
-import { loadTasks, setCurrentView } from '../../actions/tasksActions.js';
+import moveCard from '../../actions/MoveCard.js';
+import { loadTasks, setCurrentView } from '../../actions/TasksActions.js';
 import Breadcrumb from '../common/breadcrumb/Breadcrumb.jsx';
 
 class Plan extends Component {
@@ -26,7 +26,8 @@ class Plan extends Component {
     this.setState({ modalIsOpen: !this.state.modalIsOpen });
   }
 
-  moveCard(itemId, left, top) {
+  // TODO: Move http put into moveCard, rename action to 'moveCard'
+  setCardPosition(itemId, left, top) {
     // axios call to change position in database
     axios.put('/tasks', {
       id: itemId,
@@ -34,7 +35,7 @@ class Plan extends Component {
     })
     .then(response => console.log(response))
     .catch(error => console.log(error));
-    this.props.moveCardAction(itemId, left, top);
+    this.props.moveCard(itemId, left, top);
   }
 
   handleCrumbClick(crumb) {
@@ -69,7 +70,7 @@ const dropSpecs = {
     let top = Math.round(item.top + delta.y);
     left = left >= 0 ? left : 0;
     top = top >= 0 ? top : 0;
-    component.moveCard(item.id, left, top);
+    component.setCardPosition(item.id, left, top);
   },
   hover: (props, monitor, component) => console.log('hovering. Can drop? ', monitor.canDrop()),
   canDrop: (props, monitor) => {
@@ -88,8 +89,10 @@ const PlanAsDropTarget = DropTarget(Types.CARD, dropSpecs, collect)(Plan);
 Plan.propTypes = {
   allTasks: PropTypes.array,
   crumbs: PropTypes.array,
-  moveCardAction: PropTypes.func.isRequired,
+  moveCard: PropTypes.func.isRequired,
   connectDropTarget: PropTypes.func.isRequired,
+  setCurrentView: PropTypes.func.isRequired,
+  loadTasks: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -101,7 +104,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    moveCardAction,
+    moveCard,
     loadTasks,
     setCurrentView,
   }, dispatch);

@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { Button, Dropdown, Form } from 'semantic-ui-react';
 import axios from 'axios';
 import { timeOptions } from './options';
-import { loadTasks } from '../../../actions/tasksActions';
+import { loadTasks } from '../../../actions/TasksActions';
 import { last } from 'lodash/array';
 
 class AddTaskForm extends Component {

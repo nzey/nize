@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { DragSource } from 'react-dnd';
 import Types from '../../../constants';
-import { loadTasks, setCurrentView } from '../../../actions/tasksActions';
+import { loadTasks, setCurrentView } from '../../../actions/TasksActions';
 
 // http://react-dnd.github.io/react-dnd/docs-overview.html
 
@@ -37,7 +37,6 @@ function collect(connect, monitor) {
 
 class Card extends React.Component {
 
-  // TODO: (1) id should go in breadcrum at the top (2) id should go into query string
   handle(e, parent) {
     if (e.shiftKey) {
       this.props.setCurrentView(parent);
@@ -63,6 +62,8 @@ Card.propTypes = {
   isDragging: PropTypes.bool.isRequired,
   connectDragSource: PropTypes.func.isRequired,
   DragSource: PropTypes.func,
+  setCurrentView: PropTypes.func.isRequired,
+  loadTasks: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
