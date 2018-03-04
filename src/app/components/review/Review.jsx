@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 // import Card from '../common/card/Card.jsx';
 
@@ -11,6 +12,8 @@ function Review() {
     </div>
   );
 }
+
+Review.propTypes = {};
 
 function mapStateToProps(state) {
   return {

@@ -66,8 +66,6 @@ class Plan extends Component {
   }
 }
 
-Plan.propTypes = { allTasks: PropTypes.array };
-
 const dropSpecs = {
   drop: (props, monitor, component) => {
     const item = monitor.getItem();
@@ -91,6 +89,12 @@ function collect(connect, monitor) {
 }
 
 const PlanAsDropTarget = DropTarget(Types.CARD, dropSpecs, collect)(Plan);
+
+Plan.propTypes = { 
+  allTasks: PropTypes.array,
+  moveCardAction: PropTypes.func.isRequired,
+  connectDropTarget: PropTypes.func.isRequired,
+};
 
 function mapStateToProps(state) {
   return {

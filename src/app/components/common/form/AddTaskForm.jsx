@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Button, Dropdown, Form } from 'semantic-ui-react';
@@ -69,6 +70,11 @@ class AddTaskForm extends Component {
   };
 }
 
+
+AddTaskForm.propTypes = { 
+  LoadTaskAction: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired,
+};
 
 function mapStateToProps(state) {
   return {};

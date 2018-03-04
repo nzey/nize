@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { Header, Modal } from 'semantic-ui-react';
 import AddTaskForm from '../form/AddTaskForm.jsx';
 

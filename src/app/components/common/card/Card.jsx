@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import { DragSource } from 'react-dnd';
 import Types from '../../../constants';
 // http://react-dnd.github.io/react-dnd/docs-overview.html
@@ -60,7 +60,12 @@ class Card extends React.Component {
   }
 }
 
-Card.propTypes = { task: PropTypes.object };
+Card.propTypes = {
+  task: PropTypes.object.isRequired,
+  isDragging: PropTypes.bool.isRequired,
+  connectDragSource: PropTypes.func.isRequired,
+  DragSource: PropTypes.func.isRequired,
+};
 
 // Export the wrapped version
 export default DragSource(Types.CARD, cardSource, collect)(Card);
