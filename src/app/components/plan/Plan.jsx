@@ -9,7 +9,7 @@ import Types from '../../constants';
 import Card from '../common/card/Card.jsx';
 import Modal from '../common/modal/Modal.jsx';
 import moveCardAction from '../../actions/moveCard.js';
-import { loadTasks } from '../../actions/tasksActions.js';
+import { loadTasks, setCurrentView } from '../../actions/tasksActions.js';
 
 class Plan extends Component {
   constructor(props) {
@@ -35,34 +35,32 @@ class Plan extends Component {
     this.props.moveCardAction(itemId, left, top);
   }
 
-  // handleCrumbClick(parent = null) {
-  //   if (parent?) {
-  //     this.props.setCurrentView(parent);
-  //     this.props.loadTasks(parent.id); 
-  //   } else {
+  handleCrumbClick(parent) {
+    this.props.setCurrentView(parent);
+    this.props.loadTasks(parent.id);
+  }
 
-  //   }
-  // }
   render() {
     const { connectDropTarget, allTasks, parents } = this.props;
-    console.log(`THESE ARE THE PARENT: ${parents}`);
-    return connectDropTarget(
+    return parents ? connectDropTarget(
       <div className="container plan">
-        <div> 
-          { parents.length ? <span id='-1' onClick={ () => this.props.loadTasks() }>TOP</span> : null }  
+        <div>
           { parents.map(parent => {
-            return <span id={parent.id} onClick={() => this.props.loadTasks(parent.id)}>{parent.title}</span>}) 
+            return parent ? <span key={parent.id} onClick={() => this.handleCrumbClick(parent)}>{parent.title}</span> : null; })
           }
         </div>
+        
         <Button onClick={this.toggleModal}>Add Task</Button>
         <Modal type="addTask" isOpen={this.state.modalIsOpen} closeModal={this.toggleModal} />
+        <Button onClick={this.toggleBuildingGroup}>Add Group</Button>
+
         <div className="cardContainer">
           {allTasks.map(task => {
             return <Card key={task.id} task={task} />;
           })}
         </div>
-      </div>
-    );
+
+      </div>) : <div>loading</div>;
   }
 }
 
@@ -107,6 +105,7 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     moveCardAction,
     loadTasks,
+    setCurrentView,
   }, dispatch);
 }
 

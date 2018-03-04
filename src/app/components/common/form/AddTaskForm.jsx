@@ -40,7 +40,7 @@ class AddTaskForm extends Component {
     }).then(() => {
       return axios.get('/tasks');
     }).then(tasks => {
-      this.props.loadTasks(this.props.parent);
+      this.props.loadTasks(this.props.parent.id);
     });
     this.props.closeModal();
   }
