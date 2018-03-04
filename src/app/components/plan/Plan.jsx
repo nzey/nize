@@ -46,10 +46,11 @@ class Plan extends Component {
     const { connectDropTarget, allTasks, parents } = this.props;
     return parents ? connectDropTarget(
       <div className="container plan">
-        {parents ? <Breadcrumb parents={parents} handleClick={this.handleCrumbClick} /> : null}
-        <Button onClick={this.toggleModal}>Add Task</Button>
-        <Modal type="addTask" isOpen={this.state.modalIsOpen} closeModal={this.toggleModal} />
-
+        <div className="planTools">
+          <Button id='addTask' onClick={this.toggleModal}>Add Task</Button>
+          {parents ? <Breadcrumb parents={parents} handleClick={this.handleCrumbClick} /> : null}
+          <Modal type="addTask" isOpen={this.state.modalIsOpen} closeModal={this.toggleModal} />
+        </div>
         <div className="cardContainer">
           {allTasks.map(task => {
             return <Card key={task.id} task={task} />;

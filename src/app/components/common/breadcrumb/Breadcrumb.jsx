@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Crumb = ({ parent, index, last, handleClick }) => {
-  const isActive = index == last;
+  const isActive = index === last;
+  const title = index === 0 ? parent.title : `Project: ${parent.title}`;
   return (
-    <span key={parent.id}>
-      <span className={isActive ? 'crumb active' : 'crumb link'} onClick={() => isActive ? null : handleClick(parent)} >{parent.title}</span>
-      {index < last ? <span className='divider'>></span> : null}
-    </span>);
+    <div key={parent.id}>
+      <span className={isActive ? 'crumb active' : 'crumb link'} onClick={() => isActive ? null : handleClick(parent)} >{title}</span>
+      <span className='divider'>></span>
+    </div>);
 };
 
 Crumb.propTypes = {

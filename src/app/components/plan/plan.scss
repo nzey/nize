@@ -1,9 +1,19 @@
 .cardContainer {
   margin: 15px;
   position: relative;
-  // display: flex;
-  // flex-wrap: wrap;
-  // align-content: flex-start;
   overflow: scroll;
   height: 100%;
+}
+
+.planTools {
+  display: flex;
+  background-color: $coal; //#2d203a #261b3e
+  padding: 8px 15px;
+  border-bottom: 1px $gray solid;
+
+  #addTask {
+    padding: 5px;
+    margin: 0px 5px;
+    box-shadow: -2px 2px 3px #888888;
+  }
 }

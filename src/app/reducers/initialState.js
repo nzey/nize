@@ -1,4 +1,4 @@
 export default {
   tasks: [],
-  parents: [{ id: null, title: 'Top' }],
+  parents: [{ id: null, title: 'Top Level Tasks' }],
 };
