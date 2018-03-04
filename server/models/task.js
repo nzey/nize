@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER, // 30 means 30%, etc..INTEGER, // 30 means 30%, etc.
       allowNull: false,
     },
+    groupPosition: DataTypes.INTEGER,
     actualTime: DataTypes.FLOAT,
     dateStarted: DataTypes.DATE,
     dateCompleted: DataTypes.DATE,
@@ -35,16 +36,11 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'parentId',
       as: 'children',
     });
-    Task.belongsTo(models.Type, {
-      foreignKey: 'typeId',
-    });
+    Task.belongsTo(models.Type);
     Task.belongsTo(models.Resource, {
       foreignKey: 'resourceId',
     });
-    Task.hasMany(models.Dependency, {
-      foreignKey: 'taskId',
-      as: 'dependencies',
-    });
+    Task.belongsTo(models.Group);
     Task.hasMany(models.UserTask, {
       foreignKey: 'taskId',
       as: 'usertasks',

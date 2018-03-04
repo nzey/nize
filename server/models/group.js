@@ -7,10 +7,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     classMethods: {
       associate: (models) => {
-        Group.hasMany(models.Dependency, {
-          foreignKey: 'groupId',
-          as: 'dependencies',
-        });
+        Group.hasMany(models.Task);
       },
     },
   });
