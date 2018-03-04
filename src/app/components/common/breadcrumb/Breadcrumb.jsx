@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 const Crumb = ({ parent, index, last, handleClick }) => {
   const isActive = index === last;
-  const title = index === 0 ? parent.title : `Project: ${parent.title}`;
+  // const title = index === 0 ? parent.title : `Project: ${parent.title}`;
   return (
-    <div key={parent.id}>
-      <span className={isActive ? 'crumb active' : 'crumb link'} onClick={() => isActive ? null : handleClick(parent)} >{title}</span>
-      <span className='divider'>></span>
+    <div className='crumb-container' key={parent.id}>
+      <div className={isActive ? 'crumb active' : 'crumb link'} onClick={() => isActive ? null : handleClick(parent)} >{parent.title}</div>
+      { index == last ? null : <div className='divider'>></div>}
     </div>);
 };
 

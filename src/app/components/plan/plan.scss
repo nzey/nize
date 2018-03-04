@@ -7,13 +7,12 @@
 
 .planTools {
   display: flex;
-  background-color: $coal; //#2d203a #261b3e
-  padding: 8px 15px;
-  border-bottom: 1px $gray solid;
+  padding: 7px 15px;
 
   #addTask {
-    padding: 5px;
+    padding: 10px;
     margin: 0px 5px;
     box-shadow: -2px 2px 3px #888888;
+    border-radius: 100%;
   }
 }
