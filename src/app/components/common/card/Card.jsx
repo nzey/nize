@@ -64,7 +64,7 @@ Card.propTypes = {
   task: PropTypes.object.isRequired,
   isDragging: PropTypes.bool.isRequired,
   connectDragSource: PropTypes.func.isRequired,
-  DragSource: PropTypes.func.isRequired,
+  DragSource: PropTypes.func,
 };
 
 // Export the wrapped version
