@@ -8,14 +8,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     classMethods: {
       associate: (models) => {
-        Resource.hasMany(models.Task, {
-          foreignKey: 'resourceId',
-          as: 'tasks',
-        });
-        Resource.hasMany(models.Type, {
-          foreignKey: 'resourceId',
-          as: 'types',
-        });
+        Resource.hasMany(models.Task);
+        Resource.hasMany(models.Type);
       },
     },
   });

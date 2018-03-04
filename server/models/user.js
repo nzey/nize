@@ -24,10 +24,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     classMethods: {
       associate: (models) => {
-        User.hasMany(models.UserTask, {
-          foreignKey: 'userId',
-          as: 'usertasks',
-        });
+        User.hasMany(models.UserTask);
       },
     },
   });

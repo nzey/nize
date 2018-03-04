@@ -4,12 +4,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     classMethods: {
       associate: (models) => {
-        UserTask.belongsTo(models.Task, {
-          foreignKey: 'taskId',
-        });
-        UserTask.belongsTo(models.User, {
-          foreignKey: 'userId',
-        });
+        UserTask.belongsTo(models.Task);
+        UserTask.belongsTo(models.User);
       },
     },
   });

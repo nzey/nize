@@ -37,14 +37,9 @@ module.exports = (sequelize, DataTypes) => {
       as: 'children',
     });
     Task.belongsTo(models.Type);
-    Task.belongsTo(models.Resource, {
-      foreignKey: 'resourceId',
-    });
+    Task.belongsTo(models.Resource);
     Task.belongsTo(models.Group);
-    Task.hasMany(models.UserTask, {
-      foreignKey: 'taskId',
-      as: 'usertasks',
-    });
+    Task.hasMany(models.UserTask);
   };
   return Task;
 };

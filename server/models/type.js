@@ -7,13 +7,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     classMethods: {
       associate: (models) => {
-        Type.hasMany(models.Task, {
-          foreignKey: 'typeId',
-          as: 'tasks',
-        });
-        Type.belongsTo(models.Resource, {
-          foreignKey: 'resourceId',
-        });
+        Type.hasMany(models.Task);
+        Type.belongsTo(models.Resource);
       },
     },
   });
