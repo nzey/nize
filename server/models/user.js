@@ -1,6 +1,5 @@
-'use strict';
-module.exports = function(sequelize, DataTypes) {
-  var User = sequelize.define('User', {
+module.exports = (sequelize, DataTypes) => {
+  const User = sequelize.define('User', {
     username: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -24,7 +23,7 @@ module.exports = function(sequelize, DataTypes) {
     },
   }, {
     classMethods: {
-      associate: function(models) {
+      associate: (models) => {
         User.hasMany(models.UserTask, {
           foreignKey: 'userId',
           as: 'usertasks',

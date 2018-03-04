@@ -2,16 +2,15 @@ require('dotenv').load();
 
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 const path = require('path');
 const cors = require('cors');
 
-const db = require('./models/index.js');
 const handlers = require('./handlers.js');
 const port = process.env.PORT || 5000;
 
-app.use(cors())
+app.use(cors());
 app.use(express.static('./'));
 app.use(express.static('dist'));
 

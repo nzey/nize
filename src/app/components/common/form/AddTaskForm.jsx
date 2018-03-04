@@ -27,16 +27,14 @@ class AddTaskForm extends Component {
     this.setState(Object.assign(this.state, newState));
   }
 
-  handleSubmit(e) {
+  handleSubmit() {
     axios({
       method: 'POST',
       url: 'http://localhost:5000/api/tasks',
       data: this.state,
-    }).then(() => {
-      return axios.get('http://localhost:5000/api/tasks');
-    }).then(tasks => {
-      this.props.LoadTasksAction(tasks.data);
-    });
+    }).then(() => axios.get('http://localhost:5000/api/tasks'))
+      .then(tasks => this.props.LoadTasksAction(tasks.data));
+     
     this.props.closeModal();
   }
 
@@ -71,8 +69,8 @@ class AddTaskForm extends Component {
 }
 
 
-AddTaskForm.propTypes = { 
-  LoadTaskAction: PropTypes.func.isRequired,
+AddTaskForm.propTypes = {
+  LoadTasksAction: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
 };
 

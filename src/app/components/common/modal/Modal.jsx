@@ -5,14 +5,14 @@ import AddTaskForm from '../form/AddTaskForm.jsx';
 const modalSpecs = (type, closeModalFunc) => {
   let content = null;
   switch (type) {
-  case 'addTask':
-    content = <AddTaskForm closeModal={closeModalFunc} />;
-    break;
-  default:
-    break;
-  }
+    case 'addTask':
+      content = <AddTaskForm closeModal={closeModalFunc} />;
+      break;
+    default:
+      break;
+    }
   return content;
-}
+};
 
 const ModalController = (props) => (
   <Modal open={props.isOpen} >

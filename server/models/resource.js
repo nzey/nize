@@ -1,6 +1,5 @@
-'use strict';
-module.exports = function(sequelize, DataTypes) {
-  var Resource = sequelize.define('Resource', {
+module.exports = (sequelize, DataTypes) => {
+  const Resource = sequelize.define('Resource', {
     title: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -8,7 +7,7 @@ module.exports = function(sequelize, DataTypes) {
     source: DataTypes.STRING,
   }, {
     classMethods: {
-      associate: function(models) {
+      associate: (models) => {
         Resource.hasMany(models.Task, {
           foreignKey: 'resourceId',
           as: 'tasks',

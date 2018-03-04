@@ -1,6 +1,5 @@
-'use strict';
-module.exports = function(sequelize, DataTypes) {
-  var Task = sequelize.define('Task', {
+module.exports = (sequelize, DataTypes) => {
+  const Task = sequelize.define('Task', {
     title: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -25,7 +24,7 @@ module.exports = function(sequelize, DataTypes) {
     recurrence: DataTypes.STRING, // '#/[min, hr, wk, month, m, m-t, m-t-w, etc]'
   }, {
     classMethods: {
-      associate: function(models) {
+      associate: (models) => {
         Task.belongsTo(models.Type, {
           foreignKey: 'typeId',
         });

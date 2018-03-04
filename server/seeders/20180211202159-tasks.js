@@ -1,5 +1,3 @@
-'use strict';
-
 const faker = require('faker');
 const Sequelize = require('sequelize');
 const rand5 = require('../../helpers/numbers').rand5;
@@ -17,11 +15,11 @@ const mockTask = () => {
 const mockTasks = (times) => Array(times).fill({}, 0, times).map(() => mockTask());
 
 module.exports = {
-  up: function (queryInterface) {
+  up: (queryInterface) => {
     return queryInterface.bulkInsert('Tasks', mockTasks(20), {});
   },
 
-  down: function (queryInterface) {
+  down: (queryInterface) => {
     return queryInterface.bulkDelete('Tasks', null, {});
   },
 };

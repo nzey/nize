@@ -7,6 +7,6 @@ function Home() {
       <p>Click on "Plan" to start adding tasks and projects</p>
     </div>
   );
-} 
+}
 
 export default Home;

@@ -1,10 +1,9 @@
-'use strict';
-module.exports = function(sequelize, DataTypes) {
-  var UserTask = sequelize.define('UserTask', {
+module.exports = (sequelize, DataTypes) => {
+  const UserTask = sequelize.define('UserTask', {
     order: DataTypes.INTEGER,
   }, {
     classMethods: {
-      associate: function(models) {
+      associate: (models) => {
         UserTask.belongsTo(models.Task, {
           foreignKey: 'taskId',
         });

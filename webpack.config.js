@@ -1,18 +1,18 @@
-var Path = require('path');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var Webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const Path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-var isProduction = process.env.NODE_ENV === 'production';
-var cssOutputPath = isProduction ? '/styles/app.[hash].css' : '/styles/app.css';
-var jsOutputPath = isProduction ? '/scripts/app.[hash].js' : '/scripts/app.js';
-var ExtractSASS = new ExtractTextPlugin(cssOutputPath);
-var port = isProduction ? process.env.PORT || 8080 : process.env.PORT || 3000;
+const isProduction = process.env.NODE_ENV === 'production';
+const cssOutputPath = isProduction ? '/styles/app.[hash].css' : '/styles/app.css';
+const jsOutputPath = isProduction ? '/scripts/app.[hash].js' : '/scripts/app.js';
+const ExtractSASS = new ExtractTextPlugin(cssOutputPath);
+const port = isProduction ? process.env.PORT || 8080 : process.env.PORT || 3000;
 
 // ------------------------------------------
 // Base
 // ------------------------------------------
-var webpackConfig = {
+const webpackConfig = {
   resolve: {
     extensions: ['', '.js', '.jsx'],
   },
@@ -39,11 +39,11 @@ var webpackConfig = {
 // Entry points
 // ------------------------------------------
 webpackConfig.entry = !isProduction
-  ? ['babel-polyfill', 
-     'webpack-dev-server/client?http://localhost:' + port,
+  ? ['babel-polyfill',
+     `webpack-dev-server/client?http://localhost:${port}`,
      'webpack/hot/dev-server',
      Path.join(__dirname, './src/app/index')]
-  : ['babel-polyfill', 
+  : ['babel-polyfill',
       Path.join(__dirname, './src/app/index')];
 
 // ------------------------------------------
@@ -64,13 +64,13 @@ webpackConfig.devtool = isProduction ? 'source-map' : 'cheap-eval-source-map';
 // ------------------------------------------
 isProduction
   ? webpackConfig.module.loaders.push({
-      test: /\.scss$/,
-      loader: ExtractSASS.extract(['css', 'sass']),
-    })
+    test: /\.scss$/,
+    loader: ExtractSASS.extract(['css', 'sass']),
+  })
   : webpackConfig.module.loaders.push({
-      test: /\.scss$/,
-      loaders: ['style', 'css', 'sass'],
-    });
+    test: /\.scss$/,
+    loaders: ['style', 'css', 'sass'],
+  });
 
 // ------------------------------------------
 // Plugins
@@ -96,7 +96,7 @@ if (!isProduction) {
   webpackConfig.devServer = {
     contentBase: Path.join(__dirname, './'),
     hot: true,
-    port: port,
+    port,
     inline: true,
     progress: true,
     historyApiFallback: true,

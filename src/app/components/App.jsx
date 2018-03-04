@@ -13,7 +13,7 @@ class App extends Component {
     super(props);
     axios.get('http://localhost:5000/api/tasks').then(
       tasks => this.props.LoadTasksAction(tasks.data),
-      error => { throw Error(error) }
+      error => { throw Error(error); }
     );
   }
 

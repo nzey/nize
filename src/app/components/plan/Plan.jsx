@@ -29,13 +29,8 @@ class Plan extends Component {
       id: itemId,
       position: `[${left}, ${top}]`,
     })
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    }); 
-    console.log(`plan's moveCard method called with: [${left}, ${top}]`)
+    .then(response => console.log(response))
+    .catch(error => console.log(error));
     this.props.moveCardAction(itemId, left, top);
   }
 
@@ -48,7 +43,6 @@ class Plan extends Component {
         <Modal type="addTask" isOpen={this.state.modalIsOpen} closeModal={this.toggleModal} />
         <div className="cardContainer">
           {allTasks.map(task => {
-            console.log('task: ', task);
             return <Card key={task.id} task={task} />;
           })}
         </div>
@@ -75,13 +69,13 @@ const dropSpecs = {
 
 function collect(connect, monitor) {
   return {
-    connectDropTarget: connect.dropTarget()
+    connectDropTarget: connect.dropTarget(),
   };
 }
 
 const PlanAsDropTarget = DropTarget(Types.CARD, dropSpecs, collect)(Plan);
 
-Plan.propTypes = { 
+Plan.propTypes = {
   allTasks: PropTypes.array,
   moveCardAction: PropTypes.func.isRequired,
   connectDropTarget: PropTypes.func.isRequired,
