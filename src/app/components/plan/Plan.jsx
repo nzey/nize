@@ -52,7 +52,6 @@ class Plan extends Component {
         
         <Button onClick={this.toggleModal}>Add Task</Button>
         <Modal type="addTask" isOpen={this.state.modalIsOpen} closeModal={this.toggleModal} />
-        <Button onClick={this.toggleBuildingGroup}>Add Group</Button>
 
         <div className="cardContainer">
           {allTasks.map(task => {
