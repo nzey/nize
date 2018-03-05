@@ -6,11 +6,11 @@ import { Button } from 'semantic-ui-react';
 import { DropTarget } from 'react-dnd';
 import axios from 'axios';
 import Types from '../../constants';
-import Card from '../common/card/Card.jsx';
-import Modal from '../common/modal/Modal.jsx';
+import Card from '../../components/common/card/Card.jsx';
+import Modal from '../../components/common/modal/Modal.jsx';
 import moveCard from '../../actions/MoveCard.js';
 import { loadTasks, setCurrentView } from '../../actions/TasksActions.js';
-import Breadcrumb from '../common/breadcrumb/Breadcrumb.jsx';
+import Breadcrumb from '../../components/common/breadcrumb/Breadcrumb.jsx';
 
 class Plan extends Component {
   constructor(props) {

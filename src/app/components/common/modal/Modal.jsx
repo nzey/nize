@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Header, Modal } from 'semantic-ui-react';
-import AddTaskForm from '../form/AddTaskForm.jsx';
+import AddTaskForm from '../../../containers/form/AddTaskForm.jsx';
 
 const modalSpecs = (type, closeModalFunc) => {
   let content = null;

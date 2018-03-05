@@ -7,15 +7,15 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
-import App from './components/App';
-import Home from './components/home/Home';
-import Plan from './components/plan/Plan';
-import Today from './components/today/Today';
-import Now from './components/now/Now';
-import Review from './components/review/Review';
+import App from './containers/App';
+import Home from './containers/home/Home';
+import Plan from './containers/plan/Plan';
+import Today from './containers/today/Today';
+import Now from './containers/now/Now';
+import Review from './containers/review/Review';
 import rootReducers from './reducers/index';
 
-import './components/bundle.scss';
+import './bundle.scss';
 
 axios.defaults.baseURL = 'http://localhost:5000/api/';
 
