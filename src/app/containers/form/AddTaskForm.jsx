@@ -16,7 +16,6 @@ class AddTaskForm extends Component {
       title: '',
       description: '',
       estimatedTime: '',
-      estimateConfidence: null,
     };
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
