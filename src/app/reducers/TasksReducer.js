@@ -1,20 +1,23 @@
 import * as types from '../actions/actionTypes';
 import initialState from './initialState';
 
-export default function TasksReducer(state = initialState.tasks, action) {
-  const newState = state;
-
+export default function TasksReducer(state = initialState.plan, action) {
   switch (action.type) {
     case types.LOAD_TASKS_SUCCESS:
-      return action.tasks;
-    case types.MOVE_CARD: // TODO: this should be in it's own reducer for one task/card
-      for (let i = 0; i < newState.length; i++) {
-        if (newState[i].id === action.id) {
-          newState[i].position = `[${action.left}, ${action.top}]`;
-          break;
+      return Object.assign({}, state, { tasks: action.tasks, isFetching: false });
+    case types.LOAD_TASKS_REQUESTED:
+      return Object.assign({}, state, { isFetching: true });
+    case types.LOAD_TASKS_ERROR:
+      return Object.assign({}, state, { tasks: action.error, isFetching: false });
+    case types.MOVE_CARD: // TODO: this should be in its own reducer for one task/card
+      for (let i = 0; i < state.tasks.length; i++) {
+        if (state.tasks[i].id === action.id) {
+          const newTasks = [...state.tasks];
+          newTasks[i].position = `[${action.left}, ${action.top}]`;
+          return Object.assign({}, state, { tasks: newTasks });
         }
       }
-      return newState;
+      return state;
     default:
       return state;
   }

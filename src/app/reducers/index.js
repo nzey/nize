@@ -4,7 +4,7 @@ import BreadcrumbReducer from './BreadcrumbReducer.js';
 
 const rootReducer = combineReducers({
   state: (state = {}) => state,
-  tasks: TasksReducer,
+  plan: TasksReducer,
   crumbs: BreadcrumbReducer,
 });
 
