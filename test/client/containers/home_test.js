@@ -1,14 +1,12 @@
 /* eslint-disable no-undef, no-unused-expressions */
 import { renderComponent, expect } from '../../test_helper';
-// TODO: GET inside 'App' causes ConnError if server is not running.
-// Find how run or mock test server
-import App from '../../../src/app/components/App';
+import Home from '../../../src/app/containers/home/Home';
 
-describe('App', () => {
+describe('Home', () => {
   let component;
 
   beforeEach(() => {
-    component = renderComponent(App);
+    component = renderComponent(Home);
   });
 
   it('renders something', () => {
