@@ -3,6 +3,7 @@ import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { createLogger } from 'redux-logger';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
@@ -19,7 +20,8 @@ import './bundle.scss';
 
 axios.defaults.baseURL = 'http://localhost:5000/api/';
 
-const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
+const loggerMiddleware = createLogger();
+const createStoreWithMiddleware = applyMiddleware(thunk, loggerMiddleware)(createStore);
 const store = createStoreWithMiddleware(rootReducers);
 
 ReactDOM.render(
