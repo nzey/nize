@@ -10,6 +10,8 @@ import chaiJquery from 'chai-jquery';
 import { factory } from 'factory-girl';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
+import TestBackend from 'react-dnd-test-backend';
+import { DragDropContext } from 'react-dnd';
 import rootReducers from '../src/app/reducers/index';
 import path from 'path';
 
@@ -55,4 +57,10 @@ $.fn.simulate = function (eventName, value) {
   TestUtils.Simulate[eventName](this[0]);
 };
 
-export { renderComponent, expect, factory };
+function wrapInTestContext(DecoratedComponent) {
+  return DragDropContext(TestBackend)(
+    (props) => <DecoratedComponent {...props} />
+  );
+}
+
+export { renderComponent, expect, factory, wrapInTestContext };

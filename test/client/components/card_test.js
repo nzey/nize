@@ -1,15 +1,19 @@
 /* eslint-disable no-undef, no-unused-expressions */
-import { renderComponent, expect } from '../../test_helper';
+import { renderComponent, expect, wrapInTestContext, factory } from '../../test_helper';
 import Card from '../../../src/app/components/common/card/Card';
 
 describe('Card', () => {
-  let component;
+  let task;
+  let dndWrappedCard;
+  let reduxWrappedCard;
 
-  beforeEach(() => {
-    component = renderComponent(Card);
-  });
+  beforeEach(async () => {
+    task = await factory.build('task');
+    dndWrappedCard = wrapInTestContext(Card);
+    reduxWrappedCard = renderComponent(dndWrappedCard, { task, handleClick: () => {} });
+  })
 
   it('renders something', () => {
-    expect(component).to.exist;
+    expect(reduxWrappedCard).to.exist;
   });
 });
