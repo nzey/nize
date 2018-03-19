@@ -7,7 +7,6 @@ import { Button, Dropdown, Form } from 'semantic-ui-react';
 import axios from 'axios';
 import { timeOptions } from './options';
 import { loadTasks } from '../../actions/TasksActions';
-import { last } from 'lodash/array';
 
 class AddTaskForm extends Component {
   constructor(props) {
@@ -69,8 +68,8 @@ AddTaskForm.propTypes = {
 };
 
 const getCurrentCrumb = (state) => {
-  const project = last(state.crumbs);
-  return project ? project.id : null;
+  const project = state.crumbs.last();
+  return project ? project.get('id') : null;
 };
 
 function mapStateToProps(state) {

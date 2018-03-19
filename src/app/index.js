@@ -1,5 +1,7 @@
 import axios from 'axios';
 import 'babel-polyfill';
+import Immutable from 'immutable';
+import installDevTools from 'immutable-devtools';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -17,6 +19,8 @@ import Review from './containers/review/Review';
 import rootReducers from './reducers/index';
 
 import './bundle.scss';
+
+installDevTools(Immutable);
 
 axios.defaults.baseURL = 'http://localhost:5000/api/';
 

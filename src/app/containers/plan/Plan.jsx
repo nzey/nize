@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { Button } from 'semantic-ui-react';
 import { DropTarget } from 'react-dnd';
 import axios from 'axios';
+import { List, Map } from 'immutable';
 import Types from '../../constants';
 import Card from '../../components/common/card/Card.jsx';
 import Modal from '../../components/common/modal/Modal.jsx';
@@ -40,13 +41,14 @@ class Plan extends Component {
 
   handleCrumbClick(crumb) {
     this.props.setCurrentView(crumb);
-    this.props.loadTasks(crumb.id);
+    this.props.loadTasks(crumb.get('id'));
   }
 
-  handleCardClick(e, parent) {
+  handleCardClick(e, task) {
     if (e.shiftKey) {
-      this.props.setCurrentView(parent);
-      this.props.loadTasks(parent.id);
+      const crumb = Map({ id: task.get('id'), title: task.get('title') });
+      this.props.setCurrentView(crumb);
+      this.props.loadTasks(task.get('id'));
     }
   }
 
@@ -72,7 +74,7 @@ class Plan extends Component {
         </div>
         <div className="cardContainer">
           {allTasks && allTasks.map(task => {
-            return <Card key={task.id} task={task} handleClick={this.handleCardClick} />;
+            return <Card key={task.get('id')} task={task} handleClick={this.handleCardClick} />;
           })}
         </div>
       </div>);
@@ -81,6 +83,7 @@ class Plan extends Component {
   }
 }
 
+// item is undefined here
 const dropSpecs = {
   drop: (props, monitor, component) => {
     const item = monitor.getItem();
@@ -104,8 +107,8 @@ function collect(connect, monitor) {
 }
 
 Plan.propTypes = {
-  allTasks: PropTypes.array,
-  crumbs: PropTypes.array,
+  allTasks: PropTypes.instanceOf(List),
+  crumbs: PropTypes.instanceOf(List),
   moveCard: PropTypes.func.isRequired,
   connectDropTarget: PropTypes.func.isRequired,
   setCurrentView: PropTypes.func.isRequired,
@@ -117,9 +120,9 @@ Plan.propTypes = {
 function mapStateToProps(state) {
   return {
     plan: state.plan,
-    allTasks: state.plan.tasks,
-    loadingTasks: state.plan.isFetching,
-    errorFetchingTasks: state.plan.error,
+    allTasks: state.plan.get('tasks'),
+    loadingTasks: state.plan.get('isFetching'),
+    errorFetchingTasks: state.plan.get('error'),
     crumbs: state.crumbs,
   };
 }
