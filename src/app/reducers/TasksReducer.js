@@ -1,6 +1,5 @@
 import * as types from '../actions/actionTypes';
 import initialState from './initialState';
-import { getIn } from 'immutable';
 
 export default function TasksReducer(state = initialState.get('plan'), action) {
   switch (action.type) {

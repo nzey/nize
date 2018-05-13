@@ -1,13 +1,45 @@
 .card {
+  position: absolute;
+  overflow: scroll;
+  margin: 5px;
+  font-size: small;
+  border: 2px solid $light-purple;
+  border-radius: 10px;
+  height: 50px;
+  width: 150px;
+  padding: 8px;
+  background-color: $mellow-yellow;
+  color: $dark-purple;
+}
+
+.card.active {
+  border: 6px dashed #e6b957;
+
+  .title {
+    box-sizing: border-box;
+    // display: inline;
     position: absolute;
-    overflow: scroll;
-    margin: 5px;
-    font-size: small;
-    border: 2px solid $light-purple;
-    border-radius: 10px;
-    height: 50px;
-    width: 150px;
-    padding: 10px;
-    background-color: $mellow-yellow;
-    color: $dark-purple;
+    width: 60%;
+    height: 100%;
+    padding: 5px;
+
+    .div {
+      text-align: left;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      position: relative;
+      top: 25%;
+    }
+  }
+  
+  .edit {
+    box-sizing: border-box;
+    float: right;
+    font-size: 28px;
+    width: 40%;
+    height: 100%;
+    position: relative;
+    top: 15%;
+  }
 }

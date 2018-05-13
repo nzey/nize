@@ -18,7 +18,11 @@ const taskHandler = (req, res) => {
       // TODO: Use secure operators (e.g.Task.findById({ [Op.eq]: req.body.id })
       // https://github.com/sequelize/sequelize/issues/8417#issuecomment-334056048
       Task.findById(req.body.id)
-      .then(foundTask => foundTask.update({ position: req.body.position }))
+      .then(foundTask => { 
+        const updateableFields = Object.assign({}, req.body);
+        delete updateableFields.id;
+        foundTask.update(updateableFields);
+      })
       .then(updatedTask => res.send(`updated task: ${JSON.stringify(updatedTask)}`))
       .catch(err => res.send(`ERROR updating task position: ${err}`));
       break;
@@ -26,6 +30,7 @@ const taskHandler = (req, res) => {
       break;
   }
 };
+
 
 module.exports = {
   taskHandler,

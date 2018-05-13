@@ -2,6 +2,7 @@ import React from 'react';
 import { Map } from 'immutable';
 import PropTypes from 'prop-types';
 import { DragSource } from 'react-dnd';
+import { Icon } from 'semantic-ui-react';
 import Types from '../../../constants';
 
 // http://react-dnd.github.io/react-dnd/docs-overview.html
@@ -32,11 +33,16 @@ function collect(connect, monitor) {
   };
 }
 
-const Card = ({ task, handleClick, isDragging, connectDragSource }) => {
+// TODO: change handleClick name to selectTask
+const Card = ({ task, handleClick, editTaskMode, isDragging, connectDragSource, active }) => {
   const [x, y] = task.get('position') ? JSON.parse(task.get('position')) : [0, 0];
+  const classes = active ? 'card active' : 'card';
   return connectDragSource(
-    <div onClick={(e) => handleClick(e, task)} className="card" id={task.get('id')} style={{ opacity: isDragging ? 0.5 : 1, top: y, left: x }}>
-      {task.get('title')}
+    <div onClick={(e) => handleClick(e, task)} className={classes} id={task.get('id')} style={{ opacity: isDragging ? 0.5 : 1, top: y, left: x }}>
+      <div className="title">
+        <div> {task.get('title')} </div>
+      </div>
+      <div className="edit" onClick={() => editTaskMode(task)}> {active && <Icon edit name="edit" />} </div>
     </div>
   );
 };
