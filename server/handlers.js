@@ -26,6 +26,12 @@ const taskHandler = (req, res) => {
       .then(updatedTask => res.send(`updated task: ${JSON.stringify(updatedTask)}`))
       .catch(err => res.send(`ERROR updating task position: ${err}`));
       break;
+    case 'PATCH':
+      // TODO: delete children tasks too
+      Task.destroy({ where: { id: req.body.ids } })
+      .then(numDeleted => res.send(`Destroyed ${numDeleted} tasks.`))
+      .catch(err => res.send(err));
+      break;
     default:
       break;
   }
@@ -34,4 +40,5 @@ const taskHandler = (req, res) => {
 
 module.exports = {
   taskHandler,
+  Task,
 };

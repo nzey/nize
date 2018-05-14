@@ -17,6 +17,7 @@ app.use(express.static('dist'));
 app.get('/api/tasks/', jsonParser, handlers.taskHandler);
 app.post('/api/tasks', jsonParser, handlers.taskHandler);
 app.put('/api/tasks', jsonParser, handlers.taskHandler);
+app.patch('/api/tasks', jsonParser, handlers.taskHandler);
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/index.html'));

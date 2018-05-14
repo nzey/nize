@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
-import { Button } from 'semantic-ui-react';
+import { Button, Icon } from 'semantic-ui-react';
 import { DropTarget } from 'react-dnd';
 import axios from 'axios';
 import { List, Map, Set } from 'immutable';
@@ -25,6 +25,7 @@ class Plan extends Component {
     this.handleCrumbClick = this.handleCrumbClick.bind(this);
     this.handleCardClick = this.handleCardClick.bind(this);
     this.editTaskMode = this.editTaskMode.bind(this);
+    this.deleteSelected = this.deleteSelected.bind(this);
   }
 
   // TODO: Move http put into moveCard
@@ -68,6 +69,13 @@ class Plan extends Component {
     }
   }
 
+  // TODO: warning should pop-up that all subtasks will be deleted too.
+  deleteSelected() {
+    axios.patch('/tasks', { ids: this.state.activeCards.toJSON() })
+    .then(() => { this.props.loadTasks(this.props.crumbs.last().get('id')); })
+    .catch(error => console.log(error));
+  }
+
   // TODO: Once change is made to store tasks in map keyed by task-id, then instead of 
   // keeping whole copy of task here, just keep id, and retreive task from redux store
   // TODO: Task being edited should be stored in redux store and accessed from AddTaskForm
@@ -96,6 +104,7 @@ class Plan extends Component {
         <div className="planTools">
           <Button id='addTask' onClick={this.toggleModal}>Add Task</Button>
           {crumbs && <Breadcrumb crumbs={crumbs} handleClick={this.handleCrumbClick} /> }
+          <Icon trash name="trash" onClick={this.deleteSelected} />
           <Modal type={this.modalType()} isOpen={this.state.modalIsOpen} closeModal={this.toggleModal} task={this.state.editingTask} />
         </div>
         <div className="cardContainer">
