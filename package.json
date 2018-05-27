@@ -78,14 +78,17 @@
     "semantic-ui-react": "^0.70.0",
     "sequelize": "^4.33.2"
   },
-  "repl": [
-    {
-      "name": "h",
-      "module": "./server/handlers.js"
-    },
-    {
-      "name": "m",
-      "module": "./server/models/index.js"
-    }
-  ]
+  "repl": { 
+    "enableAwait": true,
+    "context": [ 
+      {
+        "name": "h",
+        "module": "./server/handlers.js"
+      },
+      {
+        "name": "m",
+        "module": "./server/models/index.js"
+      }
+    ]
+  }
 }
