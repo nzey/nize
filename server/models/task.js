@@ -31,6 +31,8 @@ module.exports = (sequelize, DataTypes) => {
     Task.hasMany(models.Task, {
       foreignKey: 'parentId',
       as: 'children',
+      onDelete: 'cascade',
+      hooks: true,
     });
     Task.belongsTo(models.Type);
     Task.belongsTo(models.Resource);

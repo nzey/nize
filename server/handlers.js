@@ -1,5 +1,6 @@
 const db = require('./models/index.js');
 const Task = db.Task;
+const Op = db.Sequelize.Op;
 
 const taskHandler = (req, res) => {
   switch (req.method) {
@@ -27,9 +28,12 @@ const taskHandler = (req, res) => {
       .catch(err => res.send(`ERROR updating task position: ${err}`));
       break;
     case 'PATCH':
-      // TODO: delete children tasks too
-      Task.destroy({ where: { id: req.body.ids } })
-      .then(numDeleted => res.send(`Destroyed ${numDeleted} tasks.`))
+      Task.findAll({ where: { id: { [Op.in]: req.body.ids } } })
+      .then(tasks => { 
+        tasks.forEach(task => task.destroy());
+        return tasks.length;
+      })
+      .then(numDeleted => res.send(`Destroyed ${numDeleted} tasks plus their dependent tasks.`))
       .catch(err => res.send(err));
       break;
     default:
