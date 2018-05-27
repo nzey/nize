@@ -15,4 +15,22 @@
     box-shadow: -2px 2px 3px #888888;
     border-radius: 100%;
   }
+
+  .trashContainer {
+    background-color: #27252e;
+    border-radius: 100%;
+    width: 100px;
+  }
+
+  .trash.icon {
+    display: inline;
+    margin: 0;
+  }
+
+  i.icon.trash:before {
+    color: #f46536;
+    font-size: 36px;
+    position: relative;
+    top: 10px;
+  }
 }

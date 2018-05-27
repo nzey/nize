@@ -104,7 +104,9 @@ class Plan extends Component {
         <div className="planTools">
           <Button id='addTask' onClick={this.toggleModal}>Add Task</Button>
           {crumbs && <Breadcrumb crumbs={crumbs} handleClick={this.handleCrumbClick} /> }
-          <Icon trash name="trash" onClick={this.deleteSelected} />
+          <div className="trashContainer" onClick={this.deleteSelected} >
+            <Icon trash name="trash" />
+          </div>
           <Modal type={this.modalType()} isOpen={this.state.modalIsOpen} closeModal={this.toggleModal} task={this.state.editingTask} />
         </div>
         <div className="cardContainer">
@@ -123,7 +125,6 @@ class Plan extends Component {
   }
 }
 
-// item is undefined here
 const dropSpecs = {
   drop: (props, monitor, component) => {
     const item = monitor.getItem();
