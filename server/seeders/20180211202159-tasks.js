@@ -1,7 +1,7 @@
 const faker = require('faker');
 const Sequelize = require('sequelize');
 const rand5 = require('../../helpers/numbers').rand5;
-const Task = require('../models/index').Task;
+const Task = require('../models/index').task;
 
 const mockTask = () => {
   return {
@@ -16,11 +16,11 @@ const mockTasks = (times) => Array(times).fill({}, 0, times).map(() => mockTask(
 
 module.exports = {
   up: (queryInterface) => {
-    return queryInterface.bulkInsert('Tasks', mockTasks(20), {})
+    return queryInterface.bulkInsert('tasks', mockTasks(20), {})
     .then(() => Task.findAll({ limit: 5 }).then(tasks => tasks[0].setChildren(tasks.slice(1))));
   },
 
   down: (queryInterface) => {
-    return queryInterface.bulkDelete('Tasks', null, {});
+    return queryInterface.bulkDelete('tasks', null, {});
   },
 };

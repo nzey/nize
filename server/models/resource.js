@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const Resource = sequelize.define('Resource', {
+  const Resource = sequelize.define('resource', {
     title: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -8,8 +8,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     classMethods: {
       associate: (models) => {
-        Resource.hasMany(models.Task);
-        Resource.hasMany(models.Type);
+        Resource.hasMany(models.task);
+        Resource.hasMany(models.type);
       },
     },
   });

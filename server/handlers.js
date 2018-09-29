@@ -1,5 +1,5 @@
 const db = require('./models/index.js');
-const Task = db.Task;
+const Task = db.task;
 const Op = db.Sequelize.Op;
 
 const taskHandler = (req, res) => {

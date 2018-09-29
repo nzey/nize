@@ -1,12 +1,12 @@
 module.exports = (sequelize, DataTypes) => {
-  const Group = sequelize.define('Group', {
+  const Group = sequelize.define('group', {
     title: {
       type: DataTypes.STRING,
     },
   }, {
     classMethods: {
       associate: (models) => {
-        Group.hasMany(models.Task);
+        Group.hasMany(models.task);
       },
     },
   });

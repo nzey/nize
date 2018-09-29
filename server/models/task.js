@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const Task = sequelize.define('Task', {
+  const Task = sequelize.define('task', {
     title: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -28,16 +28,16 @@ module.exports = (sequelize, DataTypes) => {
   // Class Methods
   Task.associate = (models) => {
     // allows Task.setChildren(), task.getChildren()
-    Task.hasMany(models.Task, {
+    Task.hasMany(models.task, {
       foreignKey: 'parentId',
       as: 'children',
       onDelete: 'cascade',
       hooks: true,
     });
-    Task.belongsTo(models.Type);
-    Task.belongsTo(models.Resource);
-    Task.belongsTo(models.Group);
-    Task.belongsToMany(models.User, { through: 'UserTask' });
+    Task.belongsTo(models.type);
+    Task.belongsTo(models.resource);
+    Task.belongsTo(models.group);
+    Task.belongsToMany(models.user, { through: 'user_tasks' });
   };
   return Task;
 };
