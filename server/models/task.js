@@ -12,7 +12,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    groupPosition: DataTypes.INTEGER,
     actualTime: DataTypes.FLOAT,
     dateStarted: DataTypes.DATE,
     dateCompleted: DataTypes.DATE,
@@ -34,9 +33,20 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: 'cascade',
       hooks: true,
     });
+    Task.hasMany(models.dependency, {
+      foreignKey: 'dependentTaskId',
+      as: 'dependencies',
+      onDelete: 'cascade',
+      hooks: true,
+    });
+    Task.hasMany(models.dependency, {
+      foreignKey: 'taskId',
+      as: 'dependentTasks',
+      onDelete: 'cascade',
+      hooks: true,
+    });
     Task.belongsTo(models.type);
     Task.belongsTo(models.resource);
-    Task.belongsTo(models.group);
     Task.belongsToMany(models.user, { through: 'user_tasks' });
   };
   return Task;
