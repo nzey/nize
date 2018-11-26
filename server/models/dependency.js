@@ -1,25 +1,2 @@
-module.exports = (sequelize, DataTypes) => {
-  const Dependency = sequelize.define('dependency', {
-    taskId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    dependantTaskId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-  });
-
-  // Class Methods
-  Dependency.associate = (models) => {
-    Dependency.belongsTo(models.task, {
-      foreignKey: 'dependantTaskId',
-      as: 'dependantTask',
-    });
-    Dependency.belongsTo(models.task, {
-      foreignKey: 'taskId',
-      as: 'task',
-    });
-  };
-  return Dependency;
-};
+// Foreign Key columns taskId and dependentTaskId defined in hasMany associations on model 'task'
+module.exports = (sequelize) => sequelize.define('dependency', {});
