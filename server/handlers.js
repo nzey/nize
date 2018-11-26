@@ -2,18 +2,18 @@ const db = require('./models/index.js');
 const Task = db.task;
 const Op = db.Sequelize.Op;
 
-const taskHandler = (req, res) => {
+const taskHandler = (req, res, next) => {
   switch (req.method) {
     case 'GET':
       const parentId = req.query.parent_id ? req.query.parent_id : null;
       Task.findAll({ where: { parentId } })
       .then(tasks => res.send(tasks))
-      .catch(err => res.send(`ERROR getting all tasks: ${err}`));
+      .catch(err => next(err));
       break;
     case 'POST':
       Task.create(req.body)
       .then(createdTask => res.send(createdTask))
-      .catch(err => res.send(`ERROR POSTING: ${err}`));
+      .catch(err => next(err));
       break;
     case 'PUT':
       // TODO: Use secure operators (e.g.Task.findById({ [Op.eq]: req.body.id })
@@ -25,7 +25,7 @@ const taskHandler = (req, res) => {
         foundTask.update(updateableFields);
       })
       .then(updatedTask => res.send(`updated task: ${JSON.stringify(updatedTask)}`))
-      .catch(err => res.send(`ERROR updating task position: ${err}`));
+      .catch(err => next(err));
       break;
     case 'PATCH':
       Task.findAll({ where: { id: { [Op.in]: req.body.ids } } })
@@ -34,7 +34,7 @@ const taskHandler = (req, res) => {
         return tasks.length;
       })
       .then(numDeleted => res.send(`Destroyed ${numDeleted} tasks plus their dependent tasks.`))
-      .catch(err => res.send(err));
+      .catch(err => next(err));
       break;
     default:
       break;

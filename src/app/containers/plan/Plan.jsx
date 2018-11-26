@@ -91,7 +91,7 @@ class Plan extends Component {
       return <div>Loading</div>;
     } else if (error) {
       console.log(error);
-      return <div></div>;
+      return <div>Error loading tasks</div>;
     }
     return content;
   }
@@ -110,6 +110,7 @@ class Plan extends Component {
           <Modal type={this.modalType()} isOpen={this.state.modalIsOpen} closeModal={this.toggleModal} task={this.state.editingTask} />
         </div>
         <div className="cardContainer">
+          {errorFetchingTasks && <div style={{ color: 'white' }}>Error loading tasks</div>}
           {allTasks && allTasks.map(task => {
             return <Card active={this.state.activeCards.has(task.get('id'))}
               key={task.get('id')}
