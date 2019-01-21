@@ -1,6 +1,19 @@
 const db = require('./models/index.js');
 const Task = db.task;
+const Dependency = db.dependency;
 const Op = db.Sequelize.Op;
+
+const dependencyHandler = (req, res, next) => {
+  switch (req.method) {
+    case 'POST':
+      Dependency.addPrerequisites(req.body.taskId, req.body.prereqTaskIds)
+      .then(newDependencies => res.send(newDependencies))
+      .catch(err => next(err));
+      break;
+    default:
+      break;
+  }
+};
 
 const taskHandler = (req, res, next) => {
   switch (req.method) {
@@ -44,5 +57,6 @@ const taskHandler = (req, res, next) => {
 
 module.exports = {
   taskHandler,
+  dependencyHandler,
   Task,
 };
