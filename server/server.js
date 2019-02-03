@@ -6,20 +6,17 @@ const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 const path = require('path');
 const cors = require('cors');
-
-const handlers = require('./handlers.js');
+const taskController = require('./controllers/taskController.js');
 const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.static('./'));
 app.use(express.static('dist'));
 
-app.get('/api/tasks/', jsonParser, handlers.taskHandler);
-app.post('/api/tasks', jsonParser, handlers.taskHandler);
-app.put('/api/tasks', jsonParser, handlers.taskHandler);
-app.patch('/api/tasks', jsonParser, handlers.taskHandler);
-
-app.post('/api/dependencies', jsonParser, handlers.dependencyHandler);
+app.get('/api/tasks/', jsonParser, taskController);
+app.post('/api/tasks', jsonParser, taskController);
+app.put('/api/tasks', jsonParser, taskController);
+app.patch('/api/tasks', jsonParser, taskController);
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/index.html'));

@@ -1,29 +1,31 @@
-const db = require('./models/index.js');
+const db = require('../models/index.js');
 const Task = db.task;
 const Dependency = db.dependency;
 const Op = db.Sequelize.Op;
 
-const dependencyHandler = (req, res, next) => {
-  switch (req.method) {
-    case 'POST':
-      Dependency.addPrerequisites(req.body.taskId, req.body.prereqTaskIds)
-      .then(newDependencies => res.send(newDependencies))
-      .catch(err => next(err));
-      break;
-    default:
-      break;
-  }
-};
-
-const taskHandler = (req, res, next) => {
+module.exports = (req, res, next) => {
   switch (req.method) {
     case 'GET':
       const parentId = req.query.parent_id ? req.query.parent_id : null;
-      Task.findAll({ where: { parentId } })
-      .then(tasks => res.send(tasks))
+      Task.findAll({
+        where: { parentId },
+        include: {
+          model: Dependency,
+          as: 'dependencies',
+          attributes: ['taskId'],
+        },
+      })
+      .then(tasks => {
+        const formattedTasks = tasks.map(task => {
+          const depTaskIds = { dependencies: task.dependencies.map(dep => dep.taskId) };
+          return Object.assign(task.get({ plain: true }), depTaskIds);
+        });
+        res.send(formattedTasks);
+      })
       .catch(err => next(err));
       break;
     case 'POST':
+      // TODO: Add prereq field for each task
       Task.create(req.body)
       .then(createdTask => res.send(createdTask))
       .catch(err => next(err));
@@ -52,11 +54,4 @@ const taskHandler = (req, res, next) => {
     default:
       break;
   }
-};
-
-
-module.exports = {
-  taskHandler,
-  dependencyHandler,
-  Task,
 };

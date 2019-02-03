@@ -1,3 +1,6 @@
+const db = require('./index.js');
+const Dependency = db.dependency;
+
 module.exports = (sequelize, DataTypes) => {
   const Task = sequelize.define('task', {
     title: {
@@ -49,5 +52,31 @@ module.exports = (sequelize, DataTypes) => {
     Task.belongsTo(models.resource);
     Task.belongsToMany(models.user, { through: 'user_tasks' });
   };
+
+  Task.retrieveTasks = function(dependencyModel, parentId) {
+    // console.log(typeof Dependency);
+    // console.log(this);
+    // console.log(typeof this.associations.dependencies);
+    Task.findAll({
+      where: { parentId },
+      include: [{
+        model: dependencyModel,
+        as: 'dependencies',
+        attributes: ['taskId'],
+      }],
+    })
+    .then(tasks => console.log(tasks))
+    .catch(err => console.log(err));
+  };
+
   return Task;
 };
+// m.task.retrieveTasks(null)
+// ISSUES with retriveTasks:
+// 1:
+//  tasks = await m.task.findAll({where: { parentId: null }, include: [{model: m.dependency, as: 'dependencies', required: true, attributes: ['taskId']}]}).then(tasks => tasks[0].dependencies[0].taskId)
+// selects all the rows from dependency too :(
+// => SELECT "task"."id", "dependencies"."taskId", "dependencies"."id" AS "dependencies.id", "dependencies"."taskId" AS "dependencies.taskId" FROM "tasks" AS "task" INNER JOIN "dependencies" AS "dependencies" ON "task"."id" = "dependencies"."dependentTaskId" WHERE "task"."parentId" IS NULL;
+// 2: 
+// Working in console but when call it from here, I get this error without reference to my code:
+// "TypeError: Cannot read property 'getTableName' of undefined"
