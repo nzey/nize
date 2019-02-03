@@ -78,16 +78,20 @@
     "semantic-ui-react": "^0.70.0",
     "sequelize": "^4.33.2"
   },
-  "repl": { 
+  "repl": {
     "enableAwait": true,
-    "context": [ 
+    "context": [
       {
-        "name": "h",
-        "module": "./server/handlers.js"
+        "name": "taskCtrl",
+        "module": "./server/controllers/taskController.js"
       },
       {
-        "name": "m",
+        "name": "db",
         "module": "./server/models/index.js"
+      },
+      {
+        "name": "taskHelper",
+        "module": "./server/helpers/taskHelper.js"
       }
     ]
   }
